@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Sign Up</title>
+
+
+</head>
+
+<body style="background: #121212;">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html"><img class="img-fluid" alt="Responsive image"
+                    src="../img/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- upperright buttons/list -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registration.html">Sign Up</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container-fluid register">
+        <div class="row">
+
+            <!-- left column: login column -->
+            <div class="col-md-2 register-left">
+                <img class="pizza-img" src="./img/moving-pizza.png" alt="" />
+                <h3>Welcome</h3>
+                <p>If you already have an account, please use the button below!</p>
+                <a class="btn btn-simple" type="button"
+                    href="file:///Users/shayansabzkoohi/Desktop/Agile%20course/Template/login.html">Login</a>
+
+            </div>
+            <!-- right column, registeration column -->
+            <!-- <form #myForm="ngForm"> -->
+
+            <div class="col-md-8 register-right">
+                <div class="row justify-content-center align-content-center">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" id="user-tab" data-toggle="tab" href="#user" role="tab"
+                                aria-controls="user" aria-selected="true">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="rest-tab" data-toggle="tab" href="#rest" role="tab"
+                                aria-controls="rest" aria-selected="false">Restaurant</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="user-tab">
+                        <!-- user tab -->
+                        <h3 class="register-heading">Register as a User</h3>
+                        <div class="row register-form">
+                            <!-- <tr>
+                                <td><b> First Name: </b></td>
+                                <td>
+                                    <input type="text" required [(ngModel)]="_firstname" name="firstname" #firstname="ngModel">
+                    
+                                    <div [hidden]="firstname.valid || firstname.pristine">
+                                        This control is invalid.</div>
+                                </td>
+                                <td> 
+                                    <p *ngIf="firstname?.errors?.required">All fields are required.</p>
+                                </td>
+                            </tr>
+                            <br><br> -->
+                    
+                            <!-- left column in user tab -->
+                            <div class="col-md-6">
+                                <!-- fist name -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_firstName" name="firstName" #firstName="ngModel" 
+                                           class="form-control" placeholder="First Name *" value="" />
+                                </div>
+                                <!-- last name -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_lastName" name="lastName" #lastName="ngModel" 
+                                           class="form-control" placeholder="Last Name *" value="" />
+                                </div>
+                                <!-- email -->
+                                <div class="form-group">
+                                    <input type="email" required [(ngModel)]="_email" name="email" #email="ngModel" 
+                                           class="form-control" placeholder="Your Email *" value="" />
+                                </div>
+                                <!-- password -->
+                                <div class="form-group">
+                                    <input type="password" required [(ngModel)]="_password" name="password" #password="ngModel" 
+                                           class="form-control" placeholder="Password *" value="" />
+                                </div>
+                                <!-- confirm password -->
+                                <div class="form-group">
+                                    <input type="password" required [(ngModel)]="_confirm" name="confirm" #confirm="ngModel" 
+                                           class="form-control" placeholder="Confirm Password *" value="" />
+                                </div>
+                                <!-- gender -->
+                                <div class="form-group">
+                                    <div class="maxl">
+                                        <label class="radio inline">
+                                            <input class="checking" type="radio" name="gender" value="male" required [(ngModel)]="_gender" 
+                                                   name="gender" #gender="ngModel">
+                                            <span> Male </span>
+                                        </label>
+                                        <label class="radio inline">
+                                            <input type="radio" name="gender" value="female" required [(ngModel)]="_gender" name="gender" #gender="ngModel" checked>
+                                            <span>Female </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- human check -->
+                                <div class="row">
+                                    <p class="col col-6">What is the answer of 2+3?</p>
+                                    <div class="form-group col-6 float-left">
+                                        <input type="password" class="form-control" placeholder="Answer *" value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- right column in user tab -->
+                            <div class="col-md-6">
+                                <!-- address -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_address" name="address" #address="ngModel" 
+                                           class="form-control" placeholder="Your Address *" value="" />
+                                </div>
+
+                                <!-- zipcode -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel" 
+                                           class="form-control" placeholder="Zipcode *" value="" />
+                                </div>
+
+                                <!-- phone number -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" 
+                                           minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                </div>
+
+                                <!-- security question -->
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option class="hidden" selected disabled>Please select your Security
+                                            Question
+                                        </option>
+                                        <option>What is your Birthdate?</option>
+                                        <option>What is the name of the street you grew up in?</option>
+                                        <option>What is your Pet's Name?</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Enter Your Answer *"
+                                        value="" />
+                                </div>
+
+                                <!-- submit button -->
+                                <input type="submit" class="btnRegister" value="Register" (click)="RegisterUser()" />
+                                <!-- <button type="submit" [disabled]="!myForm.form.valid" (click)="RegisterUser()"
+                                    style="width: 161px;">Register</button> -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    restaurant panel
+                    <div class="tab-pane fade show" id="rest" role="tabpanel" aria-labelledby="rest-tab">
+
+                        <h3 class="register-heading">Register as a Restaurant</h3>
+
+                        <!-- register form -->
+                        <div class="row register-form">
+
+                            <div class="col-md-6">
+
+                                <!-- first/last name -->
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                    </div>
+                                </div>
+
+                                <!-- title and phone no. -->
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" placeholder="Your Title *" value="" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <input type="text" maxlength="10" minlength="10" class="form-control"
+                                            placeholder="Phone *" value="" />
+                                    </div>
+                                </div>
+
+                                <!-- email -->
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Your E-mail *" value="" />
+                                </div>
+
+                                <!-- restaurant name and city/town -->
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" placeholder="Restaurant Name *"
+                                            value="" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <input type="text" class="form-control" placeholder="City / Town *" value="" />
+                                    </div>
+                                </div>
+
+                                <!-- restaurant address -->
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Restaurant Address *"
+                                        value="" />
+                                </div>
+
+                                <!-- password -->
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password *" value="" />
+                                </div>
+                                <!-- confirm password -->
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Confirm Password *"
+                                        value="" />
+                                </div>
+                            </div>
+
+                            <!-- second column in the middle -->
+                            <div class="col-md-6">
+
+                                <!-- different locations -->
+                                <div class="form-group">
+                                    <div class="btn-group col-12">
+                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Number of locations
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                                            <input type="text" class="form-control col-12" placeholder="Location"
+                                                value="" />
+                                            <button class=" col-12"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- type of cuisine -->
+                                <div class="form-group">
+                                    <div class="btn-group col-12">
+                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Type of Cuisine
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                                            <div class="checkbox col-12">
+                                                <label><input type="checkbox" value=""> Italian</label>
+                                            </div>
+                                            <div class="checkbox col-12">
+                                                <label><input type="checkbox" value=""> Chinese</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- estimated number of orders // done -->
+                                <div class="form-group">
+                                    <div class="btn-group col-12">
+                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Estimated weekly to-go orders
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                                            <input type="text" class="form-control col-12"
+                                                placeholder="Number of orders" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- delivery option -->
+                                <div class="form-group">
+                                    <div class="btn-group col-12">
+                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Are you currently offer delivery?
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                                            <div class="row col-12">
+                                                <label class="radio inline col-3">
+                                                    <input type="radio" name="option" value="Yes" checked>
+                                                    <span> Yes </span>
+                                                </label>
+                                                <label class="radio inline col-3">
+                                                    <input type="radio" name="option" value="No">
+                                                    <span> No </span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- security question -->
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option class="hidden" selected disabled>Please select your Sequrity
+                                            Question
+                                        </option>
+                                        <option>What is your Birthdate?</option>
+                                        <option>What is Your old Phone Number</option>
+                                        <option>What is your Pet Name?</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="`Answer *" value="" />
+                                </div>
+
+                                <!-- submit button -->
+
+                                <input type="submit" class="btnRegister" value="Register" (click)="RegisterUser()"/>
+                                <!-- <button type="submit" [disabled]="!myForm.form.valid" (click)="RegisterUser()"
+                                    style="width: 161px;">Register</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <!-- </form> -->
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</body>
+
+</html>
+
+<!-- <style>
+    td {
+        padding-left: 10px;
+    }
+</style>
+<form #myForm="ngForm" style="padding-left: 10px;">
+    <br>
+    <table>
+        <tr>
+            <td><b> First Name: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_firstname" name="firstname" #firstname="ngModel">
+
+                <div [hidden]="firstname.valid || firstname.pristine">
+                    This control is invalid.</div>
+            </td>
+            <td> 
+                <p *ngIf="firstname?.errors?.required">All fields are required.</p>
+            </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Last Name: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_lastname" name="lastname" #lastname="ngModel">
+
+                <div [hidden]="lastname.valid || lastname.pristine">
+                    This control is invalid.</div>
+            </td>
+            <td> 
+                <p *ngIf="lastname?.errors?.required">All fields are required.</p>
+            </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Your Email: </b></td>
+            <td>
+                <input type="email" required [(ngModel)]="_email" name="email" #email="ngModel">
+
+                <div [hidden]="email.valid || email.pristine">
+                    This control is invalid.</div>
+                </td>
+                <td> 
+                    <p *ngIf="email?.errors?.required">All fields are required.</p>
+                </td>
+            </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Password: </b></td>
+            <td>
+                <input type="password" required [(ngModel)]="_password" name="password" #password="ngModel">
+
+                <div [hidden]="password.valid || password.pristine">
+                    This control is invalid.</div>
+            </td>
+            <td> 
+                <p *ngIf="password?.errors?.required">All fields are required.</p>
+            </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Confirm Password: </b></td>
+            <td>
+                <input type="password" required [(ngModel)]="_confirm" name="confirm" #confirm="ngModel">
+
+                <div [hidden]="confirm.valid || confirm.pristine">
+                    This control is invalid.</div>
+            </td>
+            <td> 
+                <p *ngIf="confirm?.errors?.required">All fields are required.</p>
+            </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Username: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_username" name="username" #username="ngModel">
+
+                <div [hidden]="username.valid || username.pristine">
+                    This control is invalid.</div>
+
+                </td>
+                <td> 
+                    <p *ngIf="username?.errors?.required">All fields are required.</p>
+                </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td>
+                <input type="radio" required [(ngModel)]="_gender" name="gender" #gender="ngModel" value="Male"> Male
+                <input type="radio" required [(ngModel)]="_gender" name="gender" #gender="ngModel" value="Female"> Female
+            </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Your Address: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_address" name="address" #address="ngModel">
+
+                <div [hidden]="address.valid || address.pristine">
+                    This control is invalid.</div>
+
+                </td>
+                <td> 
+                    <p *ngIf="address?.errors?.required">All fields are required.</p>
+                </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Zipcode: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel">
+
+                <div [hidden]="zipcode.valid || zipcode.pristine">
+                    This control is invalid.</div>
+
+                </td>
+                <td> 
+                    <p *ngIf="zipcode?.errors?.required">All fields are required.</p>
+                </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><b> Username: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_username" name="username" #username="ngModel">
+
+                <div [hidden]="username.valid || username.pristine">
+                    This control is invalid.</div>
+
+                </td>
+                <td> 
+                    <p *ngIf="username?.errors?.required">All fields are required.</p>
+                </td>
+        </tr>
+        <br><br>
+
+        <tr>
+            <td><input type="checkbox" [(ngModel)]="_role" name="role" #role="ngModel"> Register as an Admin</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit" [disabled]="!myForm.form.valid" (click)="RegisterUser()"
+                    style="width: 161px;">Register</button>
+            </td>
+        </tr>
+    </table>
+</form> -->
