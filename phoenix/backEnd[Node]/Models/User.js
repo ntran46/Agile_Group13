@@ -4,15 +4,15 @@ var passportLocalMongoose = require('passport-local-mongoose');
 // User Schema
 var userSchema = mongoose.Schema({
   username:     { type: String, index:true },
-  password:     { type: String },
   email:        { type: String },
+  password:     { type: String },
   firstName:    { type: String },
   lastName:     { type: String },
   roles:        { type: Array },
   gender:       { type: String },
-  address:      { type: String },
-  zipcode:      { type: String },
-  txtEmpPhone:  { type: String },
+  // address:      { type: String },
+  // zipcode:      { type: String },
+  // phone:        { type: String },
 
 });
 userSchema.plugin(passportLocalMongoose);

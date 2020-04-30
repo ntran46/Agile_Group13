@@ -11,9 +11,9 @@ class RequestService {
     async  jwtReqHelper(req, permittedRoles=[]) {
         let rolePermitted = false;
 
-        // Send username and login status to view if authenticated.
+        // Send email and login status to view if authenticated.
         if(req.isAuthenticated()) {
-            let roles = await _userRepo.getRolesByUsername(req.user.username);
+            let roles = await _userRepo.getRolesByEmail(req.user.email);
             if(permittedRoles.length > 0) {
                 // Check for overlap between user's role array with roles
                 // permitted for the controller.
@@ -23,11 +23,11 @@ class RequestService {
                     if(matchingRoles.length > 0) {
                         rolePermitted = true;
                     }
-                    return { authenticated: true, username : req.user.username,
+                    return { authenticated: true, email : req.user.email,
                         roles:roles, rolePermitted:rolePermitted};
                 }
             }
-            return { authenticated: true, username : req.user.username, roles:[],
+            return { authenticated: true, email : req.user.email, roles:[],
                 rolePermitted:rolePermitted};
         }
         // Send logged out status to form if not authenticated.
@@ -52,7 +52,7 @@ class RequestService {
                 }
             }
             
-            return { authenticated: true, username : req.user.username, 
+            return { authenticated: true, email : req.user.email, 
                         roles:req.session.roles, rolePermitted:rolePermitted};
         }
         // Send logged out status to form if not authenticated.

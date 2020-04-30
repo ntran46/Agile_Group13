@@ -37,10 +37,11 @@ exports.RegisterUser  = async function(req, res){
         // Creates user object with mongoose model.
         // Note that the password is not present.
         var newUser = new User({
+            username:     req.body.username,
+            email:        req.body.email,
             firstName:    req.body.firstName,
             lastName:     req.body.lastName,
-            email:        req.body.email,
-            username:     req.body.username,
+            gender:       req.body.gender,
             roles:        roles
         });
        
@@ -80,9 +81,9 @@ exports.Login = async function(req, res) {
 }
 
 exports.LoginUser = async function(req, res, next) {
-    let roles = await _userRepo.getRolesByUsername(req.body.username);
+    let roles = await _userRepo.getRolesByEmail(req.body.email);
     sessionData = req.session;
-    sessionData.roles  = roles;
+    sessionData.roles = roles;
   
     passport.authenticate('local', {
         successRedirect : '/User/SecureArea', 

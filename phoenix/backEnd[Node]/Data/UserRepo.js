@@ -20,6 +20,16 @@ class UserRepo {
         }
     }
 
+    async getRolesByEmail(email) {
+        var user = await User.findOne({email: email}, {_id:0, roles:1});
+        if(user.roles) {
+            return user.roles;
+        }
+        else {
+            return [];
+        }
+    }    
+
     async getRolesByUsername(username) {
         var user = await User.findOne({username: username}, {_id:0, roles:1});
         if(user.roles) {

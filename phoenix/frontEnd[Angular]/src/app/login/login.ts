@@ -4,16 +4,16 @@ const BASE_URL = "http://localhost:1337/User/";
 
 @Component({
   templateUrl:'./login.html',
-
+  styleUrls: ['./login.css']
 
 })
 export class Login { 
-  _http:HttpClient;
-  _username: String;
+  _http: HttpClient;
+  _email: String;
   _password: String;
-  _token    = '';
-  _errorMessage:String = "";
-  message  = 'Not logged in.';
+  _token = '';
+  _errorMessage: String = "";
+  message = 'Not logged in.';
 
   constructor(private http: HttpClient) {
       this._http = http;
@@ -25,7 +25,7 @@ export class Login {
 
     // This free online service receives post submissions.
     this.http.post(url, {
-      username:  this._username,
+      email:  this._email,
       password:  this._password,
     })
       .subscribe(
