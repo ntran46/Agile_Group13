@@ -1,0 +1,8 @@
+.navbar-brand{
+    width: 80px;
+    height: 80px;
+}
+body{
+    overflow-x: hidden !important;
+    background-color: #900000;
+}
