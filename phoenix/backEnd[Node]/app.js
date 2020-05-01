@@ -10,7 +10,7 @@ const DB_URI      = 'mongodb://localhost:27017/phoenix';
 let options       = { useNewUrlParser: true  };
 mongoose.connect(DB_URI, options);
 
-var app           = express();
+var app  = express();
 var cors = require('cors');
 app.use(cors());
 app.use(function (req, res, next) {
@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('express-session')({
-  secret: 'keyboard cat',
+  secret: 'keyboard cat', 
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge:60000 },
@@ -68,3 +68,5 @@ app.use(express.static(path.join(__dirname, 'static')));
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+module.exports = app;

@@ -1,7 +1,31 @@
-{{updateLinks()}}
-      <nav>
-        <span *ngIf="message == 'Not logged in.'">   <a routerLink="/register/register" routerLinkActive="active">Register</a></span>
-        <span *ngIf="message == 'Not logged in.'"> | <a routerLink="/login/login" routerLinkActive="active">Login</a></span>
-        <span *ngIf="message == 'The user has been logged in.'">   <a routerLink="/login/login" routerLinkActive="active" (click)="logout()">Logout ({{user['username']}})</a></span>
-      </nav>
-      <router-outlet></router-outlet>
+<mat-toolbar  color="primary"  class="fixed-header">
+  <mat-toolbar-row>
+    <span><img  src="../assets/logo.png"  style="width:50px;"></span>
+
+    <div *ngIf="!reqInfo.authenticated">
+      <a  mat-button  routerLink="/UserRegister"  routerLinkActive="active">User Register</a>
+      <a  mat-button  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
+      <a  mat-button  routerLink="/login">Login</a>
+    </div>
+    <div *ngIf="reqInfo.authenticated">
+      
+      <div *ngIf="reqInfo.roles.includes('Manager')">
+        <a  mat-button  routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
+        <a  mat-button  routerLink="/"  routerLinkActive="active">Restaurant Management</a>
+        <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
+      </div>
+
+      <div *ngIf="!reqInfo.roles.includes('Manager')">
+        <a  mat-button  routerLink="/"  routerLinkActive="active">Home</a>
+        <a  mat-button  routerLink="/"  routerLinkActive="active">My Order</a>
+        <a  mat-button  routerLink="/"  routerLinkActive="active">Order History</a>
+        <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
+      </div>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+  <main>
+  <router-outlet  style="margin-top: 80px;"></router-outlet>
+  </main>

@@ -25,7 +25,12 @@ exports.Register = async function(req, res) {
 exports.RegisterUser  = async function(req, res){
    
     var password        = req.body.password;
-    var passwordConfirm = req.body.passwordConfirm;  
+    var passwordConfirm = req.body.passwordConfirm;
+    // if (req.body.roles == true) {
+    //     var roles = ['Admin'];
+    // } else {
+    //     var roles = ['Other'];
+    // }    
 
     if (password == passwordConfirm) {
 
@@ -53,7 +58,7 @@ exports.RegisterUser  = async function(req, res){
                         return res.json({ user : newUser, errorMessage: err, 
                                           reqInfo:reqInfo });
                     }
-                    return res.json({Message:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
+                    return res.json({errorMessage:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
                 });
 
     }
