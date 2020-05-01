@@ -4,15 +4,15 @@ import { registerLocaleData } from '@angular/common';
 const BASE_URL = "http://localhost:1337/User/";
 
 @Component({
-  templateUrl:'./register.html',
+  templateUrl:'./register_rest.html',
   styleUrls:['./register.css']
 
 
 })
-export class Register { 
+export class RegisterRestaurant { 
   _UserArray: Array<any>;
   _username: String;
-  _role: String;
+  _role: "Admin";
   _firstname: String;
   _lastname: String;
   _email: String;
@@ -45,10 +45,6 @@ export class Register {
               this._errorMessage = error;
           })
     }
-
-    clicked() {
-      window.location.href = "http://localhost:4200/register/register_rest"
-    }
     
     RegisterUser() {
       console.log(this._password)
@@ -63,7 +59,7 @@ export class Register {
       if (password == confirm) {
         this.http.post(BASE_URL + "RegisterUser",
             {
-              username: this._username,
+              // username: this._username,
               firstName: this._firstname,
               lastName: this._lastname,
               email: this._email,

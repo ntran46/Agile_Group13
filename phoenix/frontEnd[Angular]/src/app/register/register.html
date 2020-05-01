@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html"><img class="img-fluid" alt="Responsive image"
-                    src="../img/logo.png"></a>
+                    ng-src="assets/img/logo.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,9 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="registration.html">Sign Up</a>
-                    </li>
+                    </li> -->
 
                 </ul>
             </div>
@@ -47,11 +47,10 @@
 
             <!-- left column: login column -->
             <div class="col-md-2 register-left">
-                <img class="pizza-img" src="./img/moving-pizza.png" alt="" />
+                <img class="pizza-img" ng-src="assets/img/moving-pizza.png" alt="" />
                 <h3>Welcome</h3>
                 <p>If you already have an account, please use the button below!</p>
-                <a class="btn btn-simple" type="button"
-                    href="file:///Users/shayansabzkoohi/Desktop/Agile%20course/Template/login.html">Login</a>
+                <a class="btn btn-simple" type="button" href="../login/login">Login</a>
 
             </div>
             <!-- right column, registeration column -->
@@ -62,12 +61,12 @@
                     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
 
                         <li class="nav-item">
-                            <a class="nav-link active" id="user-tab" data-toggle="tab" href="#user" role="tab"
+                            <a class="nav-link disabled active" id="user-tab" data-toggle="tab" href="#" role="tab"
                                 aria-controls="user" aria-selected="true">User</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="rest-tab" data-toggle="tab" href="#rest" role="tab"
-                                aria-controls="rest" aria-selected="false">Restaurant</a>
+                            <a class="nav-link" id="rest-tab" data-toggle="tab" href="http://localhost:4200/register/register_rest" role="tab"
+                                aria-controls="rest">Restaurant</a>
                         </li>
                     </ul>
                 </div>
@@ -91,44 +90,52 @@
                                 </td>
                             </tr>
                             <br><br> -->
-                    
+
                             <!-- left column in user tab -->
                             <div class="col-md-6">
                                 <!-- fist name -->
                                 <div class="form-group">
-                                    <input type="text" required [(ngModel)]="_firstName" name="firstName" #firstName="ngModel" 
-                                           class="form-control" placeholder="First Name *" value="" />
+                                    <input type="text" required [(ngModel)]="_firstname" name="firstname"
+                                        #firstname="ngModel" class="form-control" placeholder="First Name *" value="" />
                                 </div>
                                 <!-- last name -->
                                 <div class="form-group">
-                                    <input type="text" required [(ngModel)]="_lastName" name="lastName" #lastName="ngModel" 
-                                           class="form-control" placeholder="Last Name *" value="" />
+                                    <input type="text" required [(ngModel)]="_lastname" name="lastname"
+                                        #lastname="ngModel" class="form-control" placeholder="Last Name *" value="" />
                                 </div>
                                 <!-- email -->
                                 <div class="form-group">
-                                    <input type="email" required [(ngModel)]="_email" name="email" #email="ngModel" 
-                                           class="form-control" placeholder="Your Email *" value="" />
+                                    <input type="email" required [(ngModel)]="_email" name="email" #email="ngModel"
+                                        class="form-control" placeholder="Your Email *" value="" />
                                 </div>
                                 <!-- password -->
                                 <div class="form-group">
-                                    <input type="password" required [(ngModel)]="_password" name="password" #password="ngModel" 
-                                           class="form-control" placeholder="Password *" value="" />
+                                    <input type="password" required [(ngModel)]="_password" name="password"
+                                        #password="ngModel" class="form-control" placeholder="Password *" value="" />
                                 </div>
                                 <!-- confirm password -->
                                 <div class="form-group">
-                                    <input type="password" required [(ngModel)]="_confirm" name="confirm" #confirm="ngModel" 
-                                           class="form-control" placeholder="Confirm Password *" value="" />
+                                    <input type="password" required [(ngModel)]="_confirm" name="confirm"
+                                        #confirm="ngModel" class="form-control" placeholder="Confirm Password *"
+                                        value="" />
                                 </div>
+                                <!-- Username -->
+                                <div class="form-group">
+                                    <input type="text" required [(ngModel)]="_username" name="username"
+                                        #username="ngModel" class="form-control" placeholder="Username" value="" />
+                                </div>
+
                                 <!-- gender -->
                                 <div class="form-group">
                                     <div class="maxl">
                                         <label class="radio inline">
-                                            <input class="checking" type="radio" name="gender" value="male" required [(ngModel)]="_gender" 
-                                                   name="gender" #gender="ngModel">
+                                            <input class="checking" type="radio" name="gender" value="male" required
+                                                [(ngModel)]="_gender" name="gender" #gender="ngModel">
                                             <span> Male </span>
                                         </label>
                                         <label class="radio inline">
-                                            <input type="radio" name="gender" value="female" required [(ngModel)]="_gender" name="gender" #gender="ngModel" checked>
+                                            <input type="radio" name="gender" value="female" required
+                                                [(ngModel)]="_gender" name="gender" #gender="ngModel" checked>
                                             <span>Female </span>
                                         </label>
                                     </div>
@@ -146,20 +153,21 @@
                             <div class="col-md-6">
                                 <!-- address -->
                                 <div class="form-group">
-                                    <input type="text" required [(ngModel)]="_address" name="address" #address="ngModel" 
-                                           class="form-control" placeholder="Your Address *" value="" />
+                                    <input type="text" required [(ngModel)]="_address" name="address" #address="ngModel"
+                                        class="form-control" placeholder="Your Address *" value="" />
                                 </div>
 
                                 <!-- zipcode -->
                                 <div class="form-group">
-                                    <input type="text" required [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel" 
-                                           class="form-control" placeholder="Zipcode *" value="" />
+                                    <input type="text" required [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel"
+                                        class="form-control" placeholder="Zipcode" value="" />
                                 </div>
 
                                 <!-- phone number -->
                                 <div class="form-group">
-                                    <input type="text" required [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" 
-                                           minlength="10" maxlength="10" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                    <input type="text" required [(ngModel)]="_phone" name="phone" #phone="ngModel"
+                                        minlength="10" maxlength="10" name="phone" class="form-control"
+                                        placeholder="Your Phone *" value="" />
                                 </div>
 
                                 <!-- security question -->
@@ -187,172 +195,12 @@
                         </div>
                     </div>
 
-                    restaurant panel
-                    <div class="tab-pane fade show" id="rest" role="tabpanel" aria-labelledby="rest-tab">
 
-                        <h3 class="register-heading">Register as a Restaurant</h3>
-
-                        <!-- register form -->
-                        <div class="row register-form">
-
-                            <div class="col-md-6">
-
-                                <!-- first/last name -->
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <input type="text" class="form-control" placeholder="First Name *" value="" />
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" class="form-control" placeholder="Last Name *" value="" />
-                                    </div>
-                                </div>
-
-                                <!-- title and phone no. -->
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <input type="text" class="form-control" placeholder="Your Title *" value="" />
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" maxlength="10" minlength="10" class="form-control"
-                                            placeholder="Phone *" value="" />
-                                    </div>
-                                </div>
-
-                                <!-- email -->
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your E-mail *" value="" />
-                                </div>
-
-                                <!-- restaurant name and city/town -->
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <input type="text" class="form-control" placeholder="Restaurant Name *"
-                                            value="" />
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" class="form-control" placeholder="City / Town *" value="" />
-                                    </div>
-                                </div>
-
-                                <!-- restaurant address -->
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Restaurant Address *"
-                                        value="" />
-                                </div>
-
-                                <!-- password -->
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password *" value="" />
-                                </div>
-                                <!-- confirm password -->
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm Password *"
-                                        value="" />
-                                </div>
-                            </div>
-
-                            <!-- second column in the middle -->
-                            <div class="col-md-6">
-
-                                <!-- different locations -->
-                                <div class="form-group">
-                                    <div class="btn-group col-12">
-                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Number of locations
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
-                                            <input type="text" class="form-control col-12" placeholder="Location"
-                                                value="" />
-                                            <button class=" col-12"><i class="fas fa-plus"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- type of cuisine -->
-                                <div class="form-group">
-                                    <div class="btn-group col-12">
-                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Type of Cuisine
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
-                                            <div class="checkbox col-12">
-                                                <label><input type="checkbox" value=""> Italian</label>
-                                            </div>
-                                            <div class="checkbox col-12">
-                                                <label><input type="checkbox" value=""> Chinese</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- estimated number of orders // done -->
-                                <div class="form-group">
-                                    <div class="btn-group col-12">
-                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Estimated weekly to-go orders
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
-                                            <input type="text" class="form-control col-12"
-                                                placeholder="Number of orders" value="" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- delivery option -->
-                                <div class="form-group">
-                                    <div class="btn-group col-12">
-                                        <button type="button" class="btn btn-simple  dropdown-toggle col-12"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Are you currently offer delivery?
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
-                                            <div class="row col-12">
-                                                <label class="radio inline col-3">
-                                                    <input type="radio" name="option" value="Yes" checked>
-                                                    <span> Yes </span>
-                                                </label>
-                                                <label class="radio inline col-3">
-                                                    <input type="radio" name="option" value="No">
-                                                    <span> No </span>
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- security question -->
-                                <div class="form-group">
-                                    <select class="form-control">
-                                        <option class="hidden" selected disabled>Please select your Sequrity
-                                            Question
-                                        </option>
-                                        <option>What is your Birthdate?</option>
-                                        <option>What is Your old Phone Number</option>
-                                        <option>What is your Pet Name?</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="`Answer *" value="" />
-                                </div>
-
-                                <!-- submit button -->
-
-                                <input type="submit" class="btnRegister" value="Register" (click)="RegisterUser()"/>
-                                <!-- <button type="submit" [disabled]="!myForm.form.valid" (click)="RegisterUser()"
-                                    style="width: 161px;">Register</button> -->
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
-            <!-- </form> -->
         </div>
-
+        <div class="col-md-2"></div>
+        <!-- </form> -->
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -361,6 +209,160 @@
 </body>
 
 </html>
+
+<!-- restaurant panel -->
+<!-- <div class="tab-pane fade show" id="rest" role="tabpanel" aria-labelledby="rest-tab">
+
+    <h3 class="register-heading">Register as a Restaurant</h3> -->
+
+    <!-- register form -->
+    <!-- <div class="row register-form">
+
+        <div class="col-md-6"> -->
+
+            <!-- first/last name -->
+            <!-- <div class="row">
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="First Name *" value="" />
+                </div>
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                </div>
+            </div> -->
+
+            <!-- title and phone no. -->
+            <!-- <div class="row">
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="Your Title *" value="" />
+                </div>
+                <div class="form-group col-6">
+                    <input type="text" maxlength="10" minlength="10" class="form-control"
+                        placeholder="Phone *" value="" />
+                </div>
+            </div> -->
+
+            <!-- email -->
+            <!-- <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your E-mail *" value="" />
+            </div> -->
+
+            <!-- restaurant name and city/town -->
+            <!-- <div class="row">
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="Restaurant Name *"
+                        value="" />
+                </div>
+                <div class="form-group col-6">
+                    <input type="text" class="form-control" placeholder="City / Town *" value="" />
+                </div>
+            </div> -->
+
+            <!-- restaurant address -->
+            <!-- <div class="form-group">
+                <input type="text" class="form-control" placeholder="Restaurant Address *"
+                    value="" />
+            </div> -->
+
+            <!-- password -->
+            <!-- <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password *" value="" />
+            </div> -->
+            <!-- confirm password -->
+            <!-- <div class="form-group">
+                <input type="password" class="form-control" placeholder="Confirm Password *"
+                    value="" />
+            </div>
+        </div> -->
+
+        <!-- second column in the middle -->
+        <!-- <div class="col-md-6"> -->
+
+            <!-- different locations -->
+            <!-- <div class="form-group">
+                <div class="btn-group col-12">
+                    <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Number of locations
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                        <input type="text" class="form-control col-12" placeholder="Location"
+                            value="" />
+                        <button class=" col-12"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- type of cuisine -->
+            <!-- <div class="form-group">
+                <div class="btn-group col-12">
+                    <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Type of Cuisine
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                        <div class="checkbox col-12">
+                            <label><input type="checkbox" value=""> Italian</label>
+                        </div>
+                        <div class="checkbox col-12">
+                            <label><input type="checkbox" value=""> Chinese</label>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- estimated number of orders // done -->
+            <!-- <div class="form-group">
+                <div class="btn-group col-12">
+                    <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Estimated weekly to-go orders
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                        <input type="text" class="form-control col-12"
+                            placeholder="Number of orders" value="" />
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- delivery option -->
+            <!-- <div class="form-group">
+                <div class="btn-group col-12">
+                    <button type="button" class="btn btn-simple  dropdown-toggle col-12"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Are you currently offer delivery?
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right col-11 align-content-center">
+                        <div class="row col-12">
+                            <label class="radio inline col-3">
+                                <input type="radio" name="option" value="Yes" checked>
+                                <span> Yes </span>
+                            </label>
+                            <label class="radio inline col-3">
+                                <input type="radio" name="option" value="No">
+                                <span> No </span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- security question -->
+            <!-- <div class="form-group">
+                <select class="form-control">
+                    <option class="hidden" selected disabled>Please select your Sequrity Question
+                    </option>
+                    <option>What is your Birthdate?</option>
+                    <option>What is Your old Phone Number</option>
+                    <option>What is your Pet Name?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="`Answer *" value="" />
+            </div> -->
+
+            <!-- submit button -->
+            <!-- <input type="submit" class="btnRegister" value="Register" /> -->
 
 <!-- <style>
     td {
