@@ -56,14 +56,13 @@ export class UserRegisterComponent implements OnInit {
             address        : this._address,
             zipcode        : this._zipcode,
             txtEmpPhone    : this._txtEmpPhone,
-
           })
       .subscribe(
           // Data is received from the post request.0
           (data) => {
               // Inspect the data to know how to parse it.
               console.log("POST call successful. Inspect response.", JSON.stringify(data));
-              // window.location.href = 'http://localhost:4200';
+              window.location.href = 'http://localhost:4200';
               this._errorMessage = data["errorMessage"];
               console.log(this._errorMessage)
           },

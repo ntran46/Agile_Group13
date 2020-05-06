@@ -1,91 +1,91 @@
-const User           = require('../Models/User');
+const Restaurant     = require('../Models/Restaurant');
 var   passport       = require('passport');
 const RequestService = require('../Services/RequestService');
-const UserRepo       = require('../Data/UserRepo');
-const _userRepo      = new UserRepo();
+const RestaurantRepo       = require('../Data/RestaurantRepo');
+const _RestaurantRepo      = new RestaurantRepo();
 
 
 exports.Index = async function(request, response){
-    let users = await _userRepo.allUsers();
-    if(users!= null) {
-        response.json({users:users});
+    let restaurants = await _RestaurantRepo.allRestaurant();
+    if(restaurants!= null) {
+        response.json({restaurants:restaurants});
     }
     else {
-        response.json({users:[]});
+        response.json({restaurants:[]});
     }
 };
 
 // Displays registration form.
 exports.Register = async function(req, res) {
     let reqInfo = RequestService.reqHelper(req);
-    res.render('User/Register', {errorMessage:"", user:{}, reqInfo:reqInfo})
+    res.render('Restaurant/Register', {errorMessage:"", restaurant:{}, reqInfo:reqInfo})
 };
 
 // Handles 'POST' with registration form submission.
-exports.RegisterUser  = async function(req, res){
+exports.RegisterRestaurant  = async function(req, res){
    
-    var password        = req.body.password;
-    var passwordConfirm = req.body.passwordConfirm;
-    // if (req.body.roles == true) {
-    //     var roles = ['Admin'];
-    // } else {
-    //     var roles = ['Other'];
-    // }    
+    // Creates Restaurant object with mongoose model.
+    var newRestaurant = new Restaurant({
+        email    :  req.body.email,
+        restaurantName:  req.body.restaurantName,
+        strAddress     :  req.body.strAddress,
+        city     :  req.body.city,
+        zipcode  :  req.body.zipcode,
+        phoneNo  :  req.body.phoneNo,
+        description  :  req.body.description,
+        license  :  req.body.license,
+        menu     :  req.body.menu,
+        branchLocation :  req.body.branchLocation,
+        employees:  req.body.employees,
+    });
+    
+    /// Call Repo to save 'Restaurant' object.
+    let responseObject = await _RestaurantRepo.create(newRestaurant);
 
-    if (password == passwordConfirm) {
-
-        // Creates user object with mongoose model.
-        // Note that the password is not present.
-        var newUser = new User({
-            username :  req.body.username,
-            firstName:  req.body.firstName,
-            lastName :  req.body.lastName,
-            email    :  req.body.email,
-            gender   :  req.body.gender,
-            address  :  req.body.address,
-            zipcode  :  req.body.zipcode,
-            txtEmpPhone  :  req.body.txtEmpPhone,
-        });
-       
-        // Uses passport to register the user.
-        // Pass in user object without password
-        // and password as next parameter.
-        User.register(new User(newUser), req.body.password, 
-                function(err, account) {
-                    // Show registration form with errors if fail.
-                    let reqInfo = RequestService.reqHelper(req);
-                    if (err) {
-                        return res.json({ user : newUser, errorMessage: err, 
-                                          reqInfo:reqInfo });
-                    }
-                    return res.json({errorMessage:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
-                });
-
+    // No errors so save is successful.
+    if(responseObject.errorMessage == "") {
+        console.log('Saved without errors.');
+        console.log(JSON.stringify(responseObject.obj));
+        res.json({ product:responseObject.obj,
+                                            errorMessage:""});
     }
+    // There are errors. Show form the again with an error message.
     else {
-      res.render('User/Register', { user:newUser, 
-              errorMessage: "Passwords do not match.", 
-              reqInfo:reqInfo })
+        console.log("An error occured. Item not created.");
+        res.json( {
+                        product:responseObject.obj,
+                        errorMessage:responseObject.errorMessage});
     }
+
 };
+
+exports.Delete = async function(request, response) {
+    let email           = request.body.email;
+    let deletedItem  = await _RestaurantRepo.delete(email);
+
+    // Some debug data to ensure the item is deleted.
+    console.log(JSON.stringify(deletedItem));
+    let restaurants     = await _RestaurantRepo.allRestaurant();
+    response.json( {restaurants:restaurants});
+}
 
 // Shows login form.
 exports.Login = async function(req, res) {
     let reqInfo      = RequestService.reqHelper(req);
     let errorMessage = req.query.errorMessage; 
 
-    res.render('User/Login', { user:{}, errorMessage:errorMessage, 
+    res.render('Restaurant/Login', { Restaurant:{}, errorMessage:errorMessage, 
                                reqInfo:reqInfo});
 }
 
 exports.LoginUser = async function(req, res, next) {
-    let roles   = await _userRepo.getRolesByUsername(req.body.username);
+    let roles   = await _RestaurantRepo.getUserByUsername(req.body.username);
     sessionData = req.session;
     sessionData.roles  = roles;
   
     passport.authenticate('local', {
-        successRedirect : '/User/SecureArea', 
-        failureRedirect : '/User/Login?errorMessage=Invalid login.', 
+        successRedirect : '/Restaurant/SecureArea', 
+        failureRedirect : '/Restaurant/Login?errorMessage=Invalid login.', 
     }) (req, res, next);
   };
   
@@ -95,7 +95,7 @@ exports.Logout = (req, res) => {
     req.logout();
     let reqInfo = RequestService.reqHelper(req);
 
-    res.render('User/Login', { user:{}, isLoggedIn:false, errorMessage : "", 
+    res.render('Restaurant/Login', { Restaurant:{}, isLoggedIn:false, errorMessage : "", 
                                reqInfo:reqInfo});
 };
 
@@ -106,10 +106,10 @@ exports.SecureArea  = async function(req, res) {
     let reqInfo = RequestService.reqHelper(req);
 
     if(reqInfo.authenticated) {
-        res.render('User/SecureArea', {errorMessage:"", reqInfo:reqInfo})
+        res.render('Restaurant/SecureArea', {errorMessage:"", reqInfo:reqInfo})
     }
     else {
-        res.redirect('/User/Login?errorMessage=You ' + 
+        res.redirect('/Restaurant/Login?errorMessage=You ' + 
                      'must be logged in to view this page.')
     }
 }

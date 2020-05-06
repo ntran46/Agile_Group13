@@ -1,4 +1,5 @@
 var UserController   = require('./Controllers/UserController');
+var RestaurantController = require('./Controllers/RestaurantController')
 const authMiddleware = require('./authHelper')
 const cors           = require('cors');
 
@@ -14,8 +15,14 @@ module.exports = function(app){
     app.get('/User/Logout', UserController.Logout);
     app.get('/User/SecureArea', UserController.SecureArea);
     app.get('/User/ManagerArea', UserController.ManagerArea);
-    
-    // Sign in
+
+    app.get('/Restaurant/Index', cors(), RestaurantController.Index);
+    app.get('/Restaurant/Register', RestaurantController.Register);
+    app.post('/Restaurant/RegisterRestaurant', RestaurantController.RegisterRestaurant);
+    app.delete('/Restaurant/Delete', cors(), RestaurantController.Delete);
+
+
+    // Sign in for user
     app.post(
         '/auth', cors(),
         // middleware that handles the sign in process

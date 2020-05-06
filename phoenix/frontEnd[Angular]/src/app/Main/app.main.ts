@@ -6,11 +6,11 @@ import {Location } from "@angular/common";
 
 @Component({
     selector: 'app-login',
-    templateUrl:`./restaurantManagement.component.html`,
+    templateUrl:`./main.html`,
     styleUrls: ['../app.component.css']
 })
 
-export class RestaurantManagementComponent {
+export class MainComponent {
     public site  = 'http://localhost:1337/';
     password     = ' ';         
     username     = '';
@@ -51,29 +51,6 @@ export class RestaurantManagementComponent {
                 this._errorMessage = error;
             })
     }
-
-    
-  //Remove an item in the foodItem table
-  deleteRestaurant(email) {
-
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), 
-      "body": { email:email}
-    };
-    let url = this.site + "Restaurant/Delete"
-
-    this.http.delete(url, httpOptions) 
-            .subscribe(
-                (data) => {
-                    this._errorMessage = data["errorMessage"];
-                    console.log(JSON.stringify(data));
-                    this.getAllRestaurants(); 
-                },
-                error  => {
-                console.log(JSON.stringify(error));
-                this._errorMessage = error; 
-                });
-  }
   
     //Subcribe to an event
     //Redirect to login page if user is not authenticated

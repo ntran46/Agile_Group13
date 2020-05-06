@@ -3,6 +3,7 @@ const JWT         = require('jsonwebtoken')
 const PassportJwt = require('passport-jwt')
 const User        = require('./Models/User');
 
+
 // Configure the token.
 const jwtSecret = 'QOOC3nUVl9yTZiH2F0VYjOJhwm2ZkyBjWK7Mzo4bH54cNBBUQmp262S0Tx1eBBTT'
 const jwtAlgorithm = 'HS256'

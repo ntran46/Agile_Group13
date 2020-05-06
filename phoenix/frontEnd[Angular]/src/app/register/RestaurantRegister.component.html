@@ -10,24 +10,39 @@
               <tr>
                 <td>
                   <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+                    <mat-label>Restaurant Name</mat-label>
+                    <input matInput placeholder="Restaurant Name" [(ngModel)]="_restaurantName" name="restaurantName" #restaurantName="ngModel" required>
+                    <mat-error *ngIf="restaurantName?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
                 <td>
                   <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <textarea [(ngModel)]="address"  matInput></textarea>
+                    <mat-label>Street Address</mat-label>
+                    <textarea matInput placeholder="Street Address" [(ngModel)]="_strAddress" name="strAddress" #strAddress="ngModel" required></textarea>
+                    <mat-error *ngIf="strAddress?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
                   </mat-form-field>
                 </td>
               </tr>
               <tr>
                 <td>
                   <mat-form-field>
-                    <mat-label>Job</mat-label>
-                    <input matInput placeholder="Job" [(ngModel)]="job" name="job" required>
+                    <mat-label>City</mat-label>
+                    <input matInput placeholder="City" [(ngModel)]="_city" name="city" #city="ngModel"  required>
+                    <mat-error *ngIf="city?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput placeholder="Zip Code" [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel"  required>
+                    <mat-error *ngIf="zipcode?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
                   </mat-form-field>
                 </td>
               </tr>
@@ -35,13 +50,45 @@
                 <td>
                   <mat-form-field>
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+                    <input matInput placeholder="Email" [(ngModel)]="_email" name="email" #email="ngModel"  required>
+                    <mat-error *ngIf="email?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Food License</mat-label>
+                    <input matInput placeholder="Food License" [(ngModel)]="_license" name="license" #license="ngModel"  required>
+                    <mat-error *ngIf="license?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput placeholder="Phone Number" [(ngModel)]="_phoneNo" name="phoneNo" #phoneNo="ngModel"  required>
+                    <mat-error *ngIf="phoneNo?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <textarea matInput placeholder="Description" [(ngModel)]="_description" name="description" #description="ngModel"  required></textarea>
+                    <mat-error *ngIf="description?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+
                   </mat-form-field>
                 </td>
               </tr>
             </table>
           </mat-tab>
-          <mat-tab label="Other Information" class="my-tab">
+          <!-- <mat-tab label="Other Information" class="my-tab">
             <table style="width: 100%" cellspacing="10">
               <tr>
                 <td>
@@ -84,7 +131,7 @@
               </tr>
   
             </table>
-          </mat-tab>
+          </mat-tab> -->
         </mat-tab-group>
   
   
@@ -94,6 +141,6 @@
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="createCustomer()" color="primary">Create</button>
+      <button mat-raised-button [disabled]="!email.valid || !phoneNo.valid || !restaurantName.valid || !strAddress.valid || !zipcode.valid" (click)="RegisterRestaurant()" color="primary">Create</button>
     </mat-card-actions>
   </mat-card>

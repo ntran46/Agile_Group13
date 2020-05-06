@@ -3,6 +3,7 @@
     <span><img  src="../assets/logo.png"  style="width:50px;"></span>
 
     <div *ngIf="!reqInfo.authenticated">
+      <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
       <a  mat-button  routerLink="/UserRegister"  routerLinkActive="active">User Register</a>
       <a  mat-button  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
       <a  mat-button  routerLink="/login">Login</a>
@@ -11,14 +12,15 @@
       
       <div *ngIf="reqInfo.roles.includes('Manager')">
         <a  mat-button  routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
-        <a  mat-button  routerLink="/"  routerLinkActive="active">Restaurant Management</a>
+        <a  mat-button  routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
         <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
       </div>
 
       <div *ngIf="!reqInfo.roles.includes('Manager')">
-        <a  mat-button  routerLink="/"  routerLinkActive="active">Home</a>
-        <a  mat-button  routerLink="/"  routerLinkActive="active">My Order</a>
-        <a  mat-button  routerLink="/"  routerLinkActive="active">Order History</a>
+        <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
+        <a  mat-button  routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+        <a  mat-button  routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
+        <a  mat-button  routerLink="/MyAccount"  routerLinkActive="active">Account Setting</a>
         <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
       </div>
 

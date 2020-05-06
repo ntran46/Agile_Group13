@@ -53,6 +53,7 @@ export class LoginComponent {
         // An error occurred. Data is not received. 
         error => {
           this._errorMessage = 'Error: Invalid username or password.';
+          alert('Error: Invalid username or password.');
         });
   }
 }

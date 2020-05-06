@@ -43,7 +43,7 @@ describe("Agile Project - Group 13", () => {
                     console.log()
                     res.should.have.status(200); 
                     res.body.should.be.a('object');
-
+                    // console.log(res.body)
                     // Extract 'user' info from API response.
                     let userObj = res.body.users;
                     let userFinding = 'test'
@@ -115,8 +115,7 @@ describe("Agile Project - Group 13", () => {
                         console.log(res.body.errorMessage)
                     }
                     console.log()
-                    done();
-                    
+                    done();    
                 });
         });
 
@@ -127,25 +126,24 @@ describe("Agile Project - Group 13", () => {
                             'gender' : 'Female', 'address':'555 Seymour St, Vancouver, BC' , 
                             'zipcode' : 'V6B 3H6', 'txtEmpPhone' : '(604) 434-5734'}
 
-                chai.request(app)
-                    .post(`/User/RegisterUser`) 
-                    .send(userObject)
-                    .end((err, res) => {
-                        res.should.have.status(200); 
-                        console.log()
-                        console.log("Showing output.")
-                        if (res.body.Message != undefined){
-                            console.log(res.body.Message)
-                            let user = res.body.user.username;
-                            user.should.equal('bcit');
-                            console.log(res.body.user)
-                        }else{
-                            console.log(res.body.errorMessage)
-                            
-                        }
-                        console.log()
-                        done();
-                    });
+            chai.request(app)
+                .post(`/User/RegisterUser`) 
+                .send(userObject)
+                .end((err, res) => {
+                    res.should.have.status(200); 
+                    console.log()
+                    console.log("Showing output.")
+                    if (res.body.Message != undefined){
+                        console.log(res.body.Message)
+                        let user = res.body.user.username;
+                        user.should.equal('bcit');
+                        console.log(res.body.user)
+                    }else{
+                        console.log(res.body.errorMessage)
+                    }
+                    console.log()
+                    done();
+                });
         });
     });
 });

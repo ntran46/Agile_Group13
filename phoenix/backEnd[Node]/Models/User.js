@@ -8,12 +8,12 @@ var userSchema = mongoose.Schema({
   email:        { type: String, unique: true},
   firstName:    { type: String },
   lastName:     { type: String },
-  roles:        { type: Array , default: 'Normal'},
+  roles:        { type: Array , default: 'Customer'},
   gender:       { type: String },
   address:      { type: String },
   zipcode:      { type: String },
   txtEmpPhone:  { type: String },
-
+  commemts :    {type: Object}
 });
 userSchema.plugin(passportLocalMongoose);
 var User = module.exports = mongoose.model('User', userSchema);
