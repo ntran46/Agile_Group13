@@ -1,4 +1,4 @@
-<mat-card class="my-card">
+<!-- <mat-card class="my-card">
     <mat-card-header>
       <mat-card-title>User Registration</mat-card-title>
     </mat-card-header>
@@ -24,8 +24,8 @@
                     <mat-label>First Name</mat-label>
                     <input matInput placeholder="First Name*" [(ngModel)]="_firstname" name="firstname" #firstname="ngModel" required>
                     <mat-error *ngIf="firstname?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
-                    <!-- <mat-error *ngIf="firstname?.errors?.minlength" style="color:blue"><i>Username has at least four characters.</i></mat-error> -->
-                  </mat-form-field>
+                    <mat-error *ngIf="firstname?.errors?.minlength" style="color:blue"><i>Username has at least four characters.</i></mat-error>
+                 </mat-form-field>
                 </td>
               </tr>
               <tr>
@@ -33,9 +33,9 @@
                   <mat-form-field>
                     <mat-label>Last Name</mat-label>
                     <input matInput placeholder="Last Name*" [(ngModel)]="_lastname" name="lastname" #lastname="ngModel" required>
-                    <mat-error *ngIf="lastname?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error>
+                    <mat-error *ngIf="lastname?.errors?.required" style="color:blue"><i>You must enter a value</i></mat-error> -->
                     <!-- <mat-error *ngIf="lastname?.errors?.minlength" style="color:blue"><i>Last Name has at least four characters.</i></mat-error> -->
-                  </mat-form-field>
+                  <!-- </mat-form-field>
                 </td>
               </tr>
               <tr>
@@ -122,3 +122,138 @@
       (click)="RegisterUser()" color="primary">Create</button>
     </mat-card-actions>
   </mat-card>
+  -->
+  <div class="container-fluid register">
+    <div class="row">
+        <!-- left column: login column -->
+        <div class="col-md-2 register-left">
+        </div>
+
+        <!-- right column, registeration column -->
+        <div class="col-md-8 register-right">
+
+
+  <div class="container-fluid right-col">
+    <!-- user tab -->
+    <h3 class="register-heading">Register as a User</h3>
+    <div class="row register-form">
+        <!-- <tr>
+            <td><b> First Name: </b></td>
+            <td>
+                <input type="text" required [(ngModel)]="_firstname" name="firstname" #firstname="ngModel">
+
+                <div [hidden]="firstname.valid || firstname.pristine">
+                    This control is invalid.</div>
+            </td>
+            <td> 
+                <p *ngIf="firstname?.errors?.required">All fields are required.</p>
+            </td>
+        </tr>
+        <br><br> -->
+
+        <!-- left column in user tab -->
+        <div class="col-md-6">
+            <!-- fist name -->
+            <div class="form-group">
+                <input type="text" required [(ngModel)]="_firstname" name="firstname"
+                    #firstname="ngModel" class="form-control" placeholder="First Name *" value="" />
+            </div>
+            <!-- last name -->
+            <div class="form-group">
+                <input type="text" required [(ngModel)]="_lastname" name="lastname"
+                    #lastname="ngModel" class="form-control" placeholder="Last Name *" value="" />
+            </div>
+            <!-- email -->
+            <div class="form-group">
+                <input type="email" required [(ngModel)]="_email" name="email" #email="ngModel"
+                    class="form-control" placeholder="Your Email *" value="" />
+            </div>
+              <!-- Username -->
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username" [(ngModel)]="_username" name="username" #username="ngModel" minlength="4" required />
+            </div>
+
+            <!-- password -->
+            <div class="form-group">
+                <input type="password" required [(ngModel)]="_password" name="password"
+                    #password="ngModel" class="form-control" placeholder="Password *" value="" />
+            </div>
+            <!-- confirm password -->
+            <div class="form-group">
+                <input type="password" required [(ngModel)]="_confirm" name="confirm"
+                    #confirm="ngModel" class="form-control" placeholder="Confirm Password *"
+                    value="" />
+            </div>
+          
+            <!-- gender -->
+            <div class="form-group gender">
+                <div class="maxl">
+                    <label class="radio inline">
+                        <input class="checking" type="radio" name="gender" value="male" required
+                            [(ngModel)]="_gender" name="gender" #gender="ngModel">
+                        <span> Male </span>
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="gender" value="female" required
+                            [(ngModel)]="_gender" name="gender" #gender="ngModel" checked>
+                        <span>Female </span>
+                    </label>
+                </div>
+            </div>
+            <!-- human check -->
+            <div class="row human-check">
+                <p class="col col-6">What is the answer of 2+3?</p>
+                <div class="form-group col-6 float-left">
+                    <input type="password" class="form-control" placeholder="Answer *" value="" />
+                </div>
+            </div>
+        </div>
+
+        <!-- right column in user tab -->
+        <div class="col-md-6">
+            <!-- address -->
+            <div class="form-group">
+                <input type="text" required [(ngModel)]="_address" name="address" #address="ngModel"
+                    class="form-control" placeholder="Your Address *" value="" />
+            </div>
+
+            <!-- zipcode -->
+            <div class="form-group">
+                <input type="text" required [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel"
+                    class="form-control" placeholder="Zipcode" value="" />
+            </div>
+
+            <!-- phone number -->
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" minlength="10" maxlength="10" name="txtEmpPhone" 
+                placeholder="Your Phone Number *" />
+            </div>
+
+            <!-- security question -->
+            <div class="form-group">
+                <select class="form-control">
+                    <option class="hidden" selected disabled>Please select your Security
+                        Question
+                    </option>
+                    <option>What is your Birthdate?</option>
+                    <option>What is the name of the street you grew up in?</option>
+                    <option>What is your Pet's Name?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter Your Answer *"
+                    value="" />
+            </div>
+
+            <!-- submit button -->
+            <input type="submit" class="btnRegister" value="Register" (click)="RegisterUser()" />
+            <!-- <button type="submit" [disabled]="!myForm.form.valid" (click)="RegisterUser()"
+                style="width: 161px;">Register</button> -->
+
+        </div>
+    </div>
+</div>
+</div>
+<div class="col-md-2"></div>
+</div>
+</div>

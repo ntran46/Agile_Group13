@@ -22,47 +22,55 @@ exports.Register = async function(req, res) {
 };
 
 // Handles 'POST' with registration form submission.
-exports.RegisterUser  = async function(req, res){
-   
-    var password        = req.body.password;
-    var passwordConfirm = req.body.passwordConfirm;  
+exports.RegisterUser = async function (req, res) {
+    var password = req.body.password;
+    var passwordConfirm = req.body.passwordConfirm;
+    var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
 
-    if (password == passwordConfirm) {
+    if (password.match(pattern)) {
+        if (password == passwordConfirm) {
+            // Creates user object with mongoose model.
+            // Note that the password is not present.
+            var newUser = new User({
+                username: req.body.username,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                gender: req.body.gender,
+                address: req.body.address,
+                zipcode: req.body.zipcode,
+                txtEmpPhone: req.body.txtEmpPhone,
+            });
 
-        // Creates user object with mongoose model.
-        // Note that the password is not present.
-        var newUser = new User({
-            username :  req.body.username,
-            firstName:  req.body.firstName,
-            lastName :  req.body.lastName,
-            email    :  req.body.email,
-            gender   :  req.body.gender,
-            address  :  req.body.address,
-            zipcode  :  req.body.zipcode,
-            txtEmpPhone  :  req.body.txtEmpPhone,
-        });
-       
-        // Uses passport to register the user.
-        // Pass in user object without password
-        // and password as next parameter.
-        User.register(new User(newUser), req.body.password, 
-                function(err, account) {
+            User.register(new User(newUser), req.body.password,
+                function (err, account) {
                     // Show registration form with errors if fail.
                     let reqInfo = RequestService.reqHelper(req);
                     if (err) {
-                        return res.json({ user : newUser, errorMessage: err, 
-                                          reqInfo:reqInfo });
+                        return res.json({
+                            user: newUser, errorMessage: err,
+                            reqInfo: reqInfo
+                        });
                     }
-                    return res.json({Message:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
+                    return res.json({ Message: "Register successfully", user: newUser, reqInfo: reqInfo });
                 });
-
+        }
+        else {
+            res.json({
+                user: newUser,
+                errorMessage: "Passwords do not match.",
+            });
+        }
     }
     else {
-      res.render('User/Register', { user:newUser, 
-              errorMessage: "Passwords do not match.", 
-              reqInfo:reqInfo })
+        res.json({
+            user: newUser,
+            errorMessage: "Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.",
+
+        });
     }
 };
+
 
 // Shows login form.
 exports.Login = async function(req, res) {
@@ -94,6 +102,55 @@ exports.Logout = (req, res) => {
                                reqInfo:reqInfo});
 };
 
+exports.Delete = async function(request, response) {
+    let email           = request.body.email;
+    let deletedItem  = await _userRepo.delete(email);
+
+    // Some debug data to ensure the item is deleted.
+    console.log(JSON.stringify(deletedItem));
+    let users     = await _userRepo.allUsers();
+    response.json( {users:users});
+}
+
+exports.MyAccount = async function(request, response) {
+    // request.query used to get url parameter.
+    let username  = request.query.username; 
+    
+    let UserObj = await _userRepo.getUser(username);
+    response.json( { user:UserObj });
+}
+
+// Receives posted data that is used to update the item.
+exports.EditMyAccount = async function(request, response) {
+    let username = request.body.username;
+    console.log("The Username is: " + username);
+
+    let tempUserObj  = new User( {
+        "username"   : request.body.username,
+        "firstName"  : request.body.firstname,
+        "lastName"   : request.body.lastname,
+        "email"      : request.body.email,
+        "address"    : request.body.address,
+        "zipcode"    : request.body.zipcode,
+        "txtEmpPhone": request.body.txtEmpPhone
+    });
+
+    // Call update() function in repository with the object.
+    let responseObject = await _userRepo.update(tempUserObj, "Update");
+
+    // Update was successful. Show detail page with updated object.
+    if(responseObject.errorMessage == "") {
+        response.json({ event:responseObject.obj,
+                                            errorMessage:"" });
+    }
+
+    // Update not successful. Show edit form again.
+    else {
+        response.json( {
+            event:      responseObject.obj,
+            errorMessage: responseObject.errorMessage });
+    }
+};
 
 // This displays a view called 'securearea' but only 
 // if user is authenticated.

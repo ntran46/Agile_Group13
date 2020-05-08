@@ -31,9 +31,12 @@ passport.use(
                     // If user was found with this id
                     if (user) {
                         done(null, user)
+                        console.log(user)
                     } else {
                         // If not user was found
-                        done(null, false)
+                        console.log(user)
+                        console.log(error)
+                        done(null, false, user)
                     }
                 })
                 .catch(error => {

@@ -8,7 +8,7 @@ const BASE_URL = "http://localhost:1337/Restaurant/";
 @Component({
   selector: 'app-register',
   templateUrl: './RestaurantRegister.component.html',
-   // styleUrls: ['./register.component.css']
+   styleUrls: ['./RestaurantRegister.component.css']
 })
 
 export class RestaurantRegisterComponent implements OnInit {

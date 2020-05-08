@@ -42,11 +42,12 @@ export class Login {
             sessionStorage.setItem('roles', JSON.stringify(data["user"]["roles"]))
            
             this.message = "The user has been logged in.";
-            window.location.href = 'http://localhost:4200/main/main';
+            window.location.href = 'http://localhost:4200/Main';
           }
         },
         // An error occurred. Data is not received. 
         error => {
+          console.log(error)
           this._errorMessage = 'Error: Invalid username or password.';
         });
   }

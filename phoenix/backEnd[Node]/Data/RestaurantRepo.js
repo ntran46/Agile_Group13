@@ -66,7 +66,7 @@ class RestaurantRepo {
     
                 let updated = await Restaurant.updateOne(
                     { _id: editedObj.id},
-                    {$set: { productName: editedObj.productName }}); 
+                    {$set: {  }}); 
     
                 if(updated.nModified!=0) {
                     response.obj = editedObj;

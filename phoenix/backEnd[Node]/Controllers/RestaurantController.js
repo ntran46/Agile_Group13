@@ -46,14 +46,14 @@ exports.RegisterRestaurant  = async function(req, res){
     if(responseObject.errorMessage == "") {
         console.log('Saved without errors.');
         console.log(JSON.stringify(responseObject.obj));
-        res.json({ product:responseObject.obj,
+        res.json({ restaurant:responseObject.obj,
                                             errorMessage:""});
     }
     // There are errors. Show form the again with an error message.
     else {
-        console.log("An error occured. Item not created.");
+        console.log("An error occured. Item is not created.");
         res.json( {
-                        product:responseObject.obj,
+            restaurant:responseObject.obj,
                         errorMessage:responseObject.errorMessage});
     }
 

@@ -7,7 +7,7 @@ const BASE_URL = "http://localhost:1337/User/";
 @Component({
   selector: 'app-register',
   templateUrl: './UserRegister.component.html',
-  // styleUrls: ['./register.component.css']
+  styleUrls: ['./UserRegister.component.css']
 })
 
 export class UserRegisterComponent implements OnInit {
