@@ -1,17 +1,14 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort'
 import {MatPaginator} from '@angular/material/paginator'
 
 const BASE_URL = "http://localhost:1337/User/";
 
-
-
 @Component({
   templateUrl:'./userManagement.component.html',
   styleUrls: ['./Management.component.css']
-  
 })
 
 export class userManagementComponent implements OnInit, AfterViewInit { 
@@ -21,8 +18,6 @@ export class userManagementComponent implements OnInit, AfterViewInit {
   _firstname: String;
   _lastname: String;
   _email: String;
-  _password: any;
-  _confirm: any;
   _gender: any;
   _address: string;
   _zipcode: any;
@@ -30,7 +25,6 @@ export class userManagementComponent implements OnInit, AfterViewInit {
   _reqInfo: any;
   _http:HttpClient;
   _errorMessage:String = "";
-  position: number;
   
   public ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'txtEmpPhone', 'update', 'delete'];
@@ -64,10 +58,12 @@ export class userManagementComponent implements OnInit, AfterViewInit {
           .subscribe(result => {
               this._UserArray = result.users;
               console.log(this._UserArray)
+              this.ELEMENT_DATA = []
               for (var i=0; i < this._UserArray.length; i++){
                 this.ELEMENT_DATA.push(this._UserArray[i])
               }
               console.log(this.ELEMENT_DATA)
+              this.dataSource.data = []
               this.dataSource.data = this.ELEMENT_DATA
           },
   
@@ -81,7 +77,22 @@ export class userManagementComponent implements OnInit, AfterViewInit {
     
     }
   
-    public redirectToDelete = (id: string) => {
+    public redirectToDelete = (email: string) => {
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' }), 
+        "body": { email:email}
+      };
+      let url = BASE_URL + "Delete"
+  
+      this.http.delete(url, httpOptions) 
+              .subscribe(
+                  (data) => {
+                      this._errorMessage = data["errorMessage"];
+                      this.getAllUsers(); 
+                  },
+                  error  => {
+                  this._errorMessage = error; 
+                  });
       
     }
     

@@ -22,55 +22,47 @@ exports.Register = async function(req, res) {
 };
 
 // Handles 'POST' with registration form submission.
-exports.RegisterUser = async function (req, res) {
-    var password = req.body.password;
-    var passwordConfirm = req.body.passwordConfirm;
-    var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
+exports.RegisterUser  = async function(req, res){
+   
+    var password        = req.body.password;
+    var passwordConfirm = req.body.passwordConfirm;  
 
-    if (password.match(pattern)) {
-        if (password == passwordConfirm) {
-            // Creates user object with mongoose model.
-            // Note that the password is not present.
-            var newUser = new User({
-                username: req.body.username,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                gender: req.body.gender,
-                address: req.body.address,
-                zipcode: req.body.zipcode,
-                txtEmpPhone: req.body.txtEmpPhone,
-            });
+    if (password == passwordConfirm) {
 
-            User.register(new User(newUser), req.body.password,
-                function (err, account) {
+        // Creates user object with mongoose model.
+        // Note that the password is not present.
+        var newUser = new User({
+            username :  req.body.username,
+            firstName:  req.body.firstName,
+            lastName :  req.body.lastName,
+            email    :  req.body.email,
+            gender   :  req.body.gender,
+            address  :  req.body.address,
+            zipcode  :  req.body.zipcode,
+            txtEmpPhone  :  req.body.txtEmpPhone,
+        });
+       
+        // Uses passport to register the user.
+        // Pass in user object without password
+        // and password as next parameter.
+        User.register(new User(newUser), req.body.password, 
+                function(err, account) {
                     // Show registration form with errors if fail.
                     let reqInfo = RequestService.reqHelper(req);
                     if (err) {
-                        return res.json({
-                            user: newUser, errorMessage: err,
-                            reqInfo: reqInfo
-                        });
+                        return res.json({ user : newUser, errorMessage: err, 
+                                          reqInfo:reqInfo });
                     }
-                    return res.json({ Message: "Register successfully", user: newUser, reqInfo: reqInfo });
+                    return res.json({Message:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
                 });
-        }
-        else {
-            res.json({
-                user: newUser,
-                errorMessage: "Passwords do not match.",
-            });
-        }
+
     }
     else {
-        res.json({
-            user: newUser,
-            errorMessage: "Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.",
-
-        });
+      res.render('User/Register', { user:newUser, 
+              errorMessage: "Passwords do not match.", 
+              reqInfo:reqInfo })
     }
 };
-
 
 // Shows login form.
 exports.Login = async function(req, res) {

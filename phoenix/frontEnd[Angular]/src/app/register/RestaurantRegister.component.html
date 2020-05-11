@@ -1,4 +1,4 @@
-<!-- <mat-card class="my-card">
+<mat-card class="my-card">
     <mat-card-header>
       <mat-card-title>Restaurant Partner Registration</mat-card-title>
     </mat-card-header>
@@ -87,7 +87,7 @@
                 </td>
               </tr>
             </table>
-          </mat-tab> -->
+          </mat-tab>
           <!-- <mat-tab label="Other Information" class="my-tab">
             <table style="width: 100%" cellspacing="10">
               <tr>
@@ -132,7 +132,7 @@
   
             </table>
           </mat-tab> -->
-        <!-- </mat-tab-group>
+        </mat-tab-group>
   
   
   
@@ -143,91 +143,4 @@
     <mat-card-actions>
       <button mat-raised-button [disabled]="!email.valid || !phoneNo.valid || !restaurantName.valid || !strAddress.valid || !zipcode.valid" (click)="RegisterRestaurant()" color="primary">Create</button>
     </mat-card-actions>
-  </mat-card> -->
-
-  <div class="container-fluid register">
-    <div class="row">
-        <!-- left column: login column -->
-        <div class="col-md-2 register-left">
-        </div>
-
-        <!-- right column, registeration column -->
-        <div class="col-md-8 register-right">
-
-                <!-- restaurant register containet -->
-                <div class="container-fluid right-col">
-                    
-                    <h3  class="register-heading">Register as a Restaurant</h3>
-
-                    <!-- register form -->
-                    <div class="row register-form">
-                     
-                        <!-- left column -->
-                        <div class="col-md-6">
-
-                          <!-- restaurant name and city/town -->
-                          <div class="row">
-                            
-                              <div class="form-group col-7">
-                                  <input type="text" class="form-control" placeholder="Restaurant Name *" [(ngModel)]="_restaurantName" name="restaurantName" #restaurantName="ngModel" required />
-                                  <mat-error  *ngIf="restaurantName?.errors?.required"><p>You must enter a value</p></mat-error>
-                              </div>
-                              <div class="form-group col-5">
-                                  <input type="text" class="form-control" placeholder="City" [(ngModel)]="_city" name="city" #city="ngModel"  required/>
-                                  <mat-error  *ngIf="city?.errors?.required"><p>You must enter a value</p></mat-error>
-                              </div>
-                          </div>
-                          
-                          <!-- restaurant address -->
-                          <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Street Address" [(ngModel)]="_strAddress" name="strAddress" #strAddress="ngModel" required/>
-                              <mat-error  *ngIf="strAddress?.errors?.required"><p>You must enter a value</p></mat-error>
-
-                          </div>
-                          
-                          <!-- Zipcode -->
-                          <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel"  required/>
-                            <mat-error  *ngIf="zipcode?.errors?.required"><p>You must enter a value</p></mat-error>
-
-                          </div>
-
-                        </div>
-
-                        <!-- right column -->
-                        <div class="col-md-6">
-
-                        <!-- Phone number -->
-                        <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="_phoneNo" name="phoneNo" #phoneNo="ngModel"  required />
-                          <mat-error  *ngIf="phoneNo?.errors?.required"><p>You must enter a value</p></mat-error>
-                        </div>
-
-                        <!-- email -->
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="_email" name="email" #email="ngModel"  required/>
-                            <mat-error  *ngIf="email?.errors?.required"><p>You must enter a value</p></mat-error>
-                        </div>
-
-                        <!-- license -->
-                        <div class="form-group">
-                          <input type="email" class="form-control" placeholder="Food License" [(ngModel)]="_license" name="license" #license="ngModel"  required/>
-                          <mat-error  *ngIf="license?.errors?.required"><p>You must enter a value</p></mat-error>
-                        </div>
-
-                        </div>
-                      
-                      
-                      </div>
-                    
-                        <textarea  class="form-control textArea" placeholder="Description" [(ngModel)]="_description" name="description" #description="ngModel"  required row=3></textarea>
-                        <!-- submit button -->
-                        <input type="submit" class="btnRegister btn-default btn-md"  value="Register"[disabled]="!email.valid || !phoneNo.valid || !restaurantName.valid || !strAddress.valid || !zipcode.valid" (click)="RegisterRestaurant()"/>
-                                                  
-
-                </div>
-
-    </div>
-    <div class="col-md-2"></div>
-  </div>
-  </div>
+  </mat-card>

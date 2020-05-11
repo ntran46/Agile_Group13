@@ -8,7 +8,7 @@ const BASE_URL = "http://localhost:1337/Restaurant/";
 @Component({
   selector: 'app-register',
   templateUrl: './RestaurantRegister.component.html',
-   styleUrls: ['./RestaurantRegister.component.css']
+   // styleUrls: ['./register.component.css']
 })
 
 export class RestaurantRegisterComponent implements OnInit {
@@ -57,7 +57,7 @@ export class RestaurantRegisterComponent implements OnInit {
         (data) => {
             // Inspect the data to know how to parse it.
             console.log("POST call successful. Inspect response.", JSON.stringify(data));
-            window.location.href = 'http://localhost:4200/main';
+            window.location.href = 'http://localhost:4200/Main';
             this._errorMessage = data["errorMessage"];
             console.log(this._errorMessage)
         },

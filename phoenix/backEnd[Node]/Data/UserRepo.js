@@ -65,7 +65,7 @@ class UserRepo {
                     var updated = await User.updateOne(
                         { username: editedObj.username},
                         // Set new attribute values here.
-    
+                        // {$set: { attendee: editedObj.attendee }}
                         ); 
                 }
     
