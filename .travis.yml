@@ -2,6 +2,6 @@ language: node_js
 node_js: 
         - "stable"
 before_script: chmod 0777 phoenix/backEnd[Node]/test/node_modules/.bin/mocha
-script: cd phoenix/backEnd[Node]/test; npm install; npm test;
+script: cd phoenix/backEnd[Node]/test; npm install; npm install mongoose; npm test;
 services: 
         - mongodb
