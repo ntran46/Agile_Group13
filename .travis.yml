@@ -2,3 +2,5 @@ language: node_js
 node_js: 
         - "stable"
 script: cd phoenix/backEnd[Node]/test; npm install nyc; npm test;
+services: 
+        - "mongodb"
