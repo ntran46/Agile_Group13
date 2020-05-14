@@ -1,4 +1,0 @@
-language: node_js
-node_js:
-        - "stable"
-script: cd test; npm install nyc; npm test;
