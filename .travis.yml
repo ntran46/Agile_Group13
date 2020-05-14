@@ -1,6 +1,6 @@
 language: node_js
 node_js: 
         - "stable"
-install: cd phoenix/backEnd[Node]/test; npm install; npm install mocha; npm install chai; npm install nyc;
-script: cd phoenix/backEnd[Node]/test; npm test;
-services: mongodb
+script: cd phoenix/backEnd[Node]/test; npm install; npm test;
+services: 
+        - mongodb
