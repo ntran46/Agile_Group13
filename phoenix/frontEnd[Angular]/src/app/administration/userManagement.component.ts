@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort'
 import {MatPaginator} from '@angular/material/paginator'
+import { ApiService } from '../ApiService';
 
 const BASE_URL = "http://localhost:1337/User/";
 
@@ -22,9 +23,10 @@ export class userManagementComponent implements OnInit, AfterViewInit {
   _address: string;
   _zipcode: any;
   _txtEmpPhone: any;
-  _reqInfo: any;
+  reqInfo: any;
   _http:HttpClient;
   _errorMessage:String = "";
+  _apiService  : ApiService;
   
   public ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'txtEmpPhone', 'update', 'delete'];
@@ -34,6 +36,8 @@ export class userManagementComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private http: HttpClient) {
+    this._apiService = new ApiService(http, this);
+      this.getSecureData()
       this._http = http;
     }
 
@@ -54,7 +58,6 @@ export class userManagementComponent implements OnInit, AfterViewInit {
     getAllUsers() {
       let url = BASE_URL + 'Index'
       this._http.get<any>(url)
-          // Get data and wait for result.
           .subscribe(result => {
               this._UserArray = result.users;
               console.log(this._UserArray)
@@ -66,9 +69,7 @@ export class userManagementComponent implements OnInit, AfterViewInit {
               this.dataSource.data = []
               this.dataSource.data = this.ELEMENT_DATA
           },
-  
           error =>{
-            // Let user know about the error.
               this._errorMessage = error;
           })
     }
@@ -85,7 +86,7 @@ export class userManagementComponent implements OnInit, AfterViewInit {
       let url = BASE_URL + "Delete"
   
       this.http.delete(url, httpOptions) 
-              .subscribe(
+                .subscribe(
                   (data) => {
                       this._errorMessage = data["errorMessage"];
                       this.getAllUsers(); 
@@ -93,7 +94,23 @@ export class userManagementComponent implements OnInit, AfterViewInit {
                   error  => {
                   this._errorMessage = error; 
                   });
-      
+    }
+
+    getSecureData() {  
+      this._apiService.getData('User/SecureAreaJwt', 
+                              this.secureDataCallback);
+    }
+    // Callback needs a pointer '_this' to current instance.
+    secureDataCallback(result, _this) {
+        if(result.errorMessage == "") {
+            _this.secureData = result.secureData;
+            _this.reqInfo = result.reqInfo;
+        }
+        else {
+            console.log(JSON.stringify(result.errorMessage));
+            alert("You are not authorized to exeucute this acction")
+            window.location.href = '../login';
+        }   
     }
     
 }

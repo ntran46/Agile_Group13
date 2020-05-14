@@ -12,11 +12,11 @@
                 <td style="width: 3cm;"><b>Phone Number</b></td>
             </tr>
             <tr>
-                <td >{{res.restaurantName}}</td>
+                <td >{{res[0].restaurantName}}</td>
                 <td></td>
-                <td>{{res.strAddress}}, {{res.city}}, {{res.zipcode}}</td>
+                <td>{{res[0].strAddress}}, {{res[0].city}}, {{res[0].zipcode}}</td>
                 <td></td>
-                <td>{{res.phoneNo}}</td>
+                <td>{{res[0].phoneNo}}</td>
             </tr>
             <tr style="height:0.5cm"></tr>
             <tr>
@@ -28,7 +28,13 @@
             </tr>
             <tr>
                 <td></td>
-                <td colspan="3" >{{res.description}}</td>
+                <td colspan="3" >{{res[0].description}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="ViewReview/{{res[0]._id}}">Rating</a>: {{res[1] || 0}}</td>
+                <td> <a href="ViewReview/{{res[0]._id}}">Reviews</a>: {{res[2] || 0}}</td>
+                <td> <a href="WriteReviews/{{res[0]._id}}"> Write a review </a></td>
             </tr>
         </table>
     </div>

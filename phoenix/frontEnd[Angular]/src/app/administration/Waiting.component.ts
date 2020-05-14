@@ -1,16 +1,14 @@
 import { Component, Input } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ApiService } from '../ApiService';
-import {Router} from "@angular/router";
-import {Location } from "@angular/common";
 
 @Component({
     selector: 'app-login',
-    templateUrl:`./main.html`,
+    templateUrl:`./Waiting.component.html`,
     styleUrls: ['../app.component.css']
 })
 
-export class MainComponent {
+export class WaitingListComponent {
     public site  = 'http://localhost:1337/';
     password     = ' ';         
     username     = '';
@@ -18,54 +16,74 @@ export class MainComponent {
     roles        : Array<any> = [];
     _http        : HttpClient;
     _id          : Number = 1;
-    rating       : Number=0;
-    review       : Number=0;
-    _eventName   : String=" ";
-    _description : String="";
+    checkList    : any =[];
+    _licenseChecked   : String="";
+    _locationChecked   : String="";
+    _nameChecked   : String="";
+    _phoneChecked : String="";
     _errorMessage: String = " ";
-    _RestaurantItem   : any=[];
+    _RestaurantItem   : any =[];
     reqInfo      : any = {};
     _apiService  : ApiService;
-    _ReviewItem  : Array<any>;
 
-  
     constructor(private http: HttpClient) {
         this._apiService = new ApiService(http, this);
         this._http = http;
         this.getAllRestaurants();
-        if(this.reqInfo.roles){
-            if(this.reqInfo.roles.includes("Manager")){
-                this.getManagerData()
-            }
-        }
+        this.getSecureData()
     }
 
     getAllRestaurants() {
         let url = this.site + 'Restaurant/Index'
         this._http.get<any>(url)
             .subscribe(result => {
-                // this._RestaurantItem = result.restaurants;
-                console.log(result.restaurants)
-
-                // for (var i =0; i <this._RestaurantItem.length; i++){
-                //    console.log(this._RestaurantItem[i])
-                //     // var total_reviews = (this._RestaurantItem[i].comments.length) ? this._RestaurantItem[i].comments.length : 0;
-                //     // Object.assign(this._RestaurantItem[i],{review: total_reviews})
-                // }
                 for (var i =0; i<result.restaurants.length; i++){
-                    if (result.restaurants[i][0].isApproved == 1){
-                        this._RestaurantItem.push(result.restaurants[i])
+                    if (result.restaurants[i][0].isApproved == 0){
+                        this._RestaurantItem.push(result.restaurants[i][0])
                     }
                 }
                 console.log(this._RestaurantItem)
-                
             }, 
             error =>{
                 this._errorMessage = error;
             })
     }
 
-  
+    updateWaitingItem(email, action, ID) {
+        var checkBox = document.getElementById(ID) as HTMLInputElement;
+        let _isApproved = 0;
+        if (action == 'Approved'){
+            _isApproved = 1
+        }
+        else if (action == 'Declined'){
+            _isApproved = 2
+        }
+
+        if(checkBox.checked){
+
+            let url = this.site + "Restaurant/Update"
+            this.http.post(url, 
+                    { email: email,
+                      _id  : ID,
+                      isApproved: _isApproved
+                    }) 
+                    .subscribe(
+                        (data) => {
+                            this._errorMessage = data["errorMessage"];
+                            console.log(JSON.stringify(data));
+                            this.getAllRestaurants(); 
+                        },
+                        error  => {
+                        console.log(JSON.stringify(error));
+                        this._errorMessage = error; 
+                        });
+        }
+        else{
+            alert("All conditions should be checked before approving")
+        }
+
+    }
+     
     getSecureData() {  
         this._apiService.getData('User/SecureAreaJwt', 
                                 this.secureDataCallback);
@@ -75,7 +93,6 @@ export class MainComponent {
         if(result.errorMessage == "") {
             _this.secureData = result.secureData;
             _this.reqInfo = result.reqInfo;
-            console.log(result.reqInfo)
         }
         else {
             console.log(JSON.stringify(result.errorMessage));
@@ -83,20 +100,4 @@ export class MainComponent {
             window.location.href = '../login';
         }   
     }
-  
-    getManagerData() {  
-        this._apiService.getData('User/ManagerAreaJwt', 
-                                this.managerDataCallback);
-    }
-    // Callback needs a pointer '_this' to current instance.
-    managerDataCallback(result, _this) {
-        if(result.errorMessage == "") {
-            _this.reqInfo = result.reqInfo;
-            console.log(result.reqInfo)
-        }
-        else {
-            alert(JSON.stringify(result.errorMessage)); 
-        }
-    }
-
 }

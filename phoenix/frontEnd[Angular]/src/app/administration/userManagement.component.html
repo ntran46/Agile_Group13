@@ -1,3 +1,7 @@
+<div *ngIf="reqInfo.authenticated">
+
+  <div *ngIf="reqInfo.roles.includes('Manager')">
+
 <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
@@ -54,7 +58,7 @@
   </table>
   <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
   
-  
+</div></div>
   <!-- Copyright 2019 Google LLC. All Rights Reserved.
       Use of this source code is governed by an MIT-style license that
       can be found in the LICENSE file at http://angular.io/license -->

@@ -1,6 +1,4 @@
 var mongoose              = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
-
 
 var restaurantSchema = mongoose.Schema({
   email:        { type: String, index: true },
@@ -8,14 +6,15 @@ var restaurantSchema = mongoose.Schema({
   strAddress:   { type: String },
   city:         { type: String },
   zipcode:      { type: String },
-  phoneNo:      { type: String , unique: true},
+  phoneNo:      { type: String, unique: true},
   license:      { type: String, unique: true},
-  description:   { type: String },
-  menu   :      { type: Array},
+  description:  { type: String },
+  menu   :      { type: Array },
   branchLocation:     { type: Array },
   employees:    { type: Object },
-  commemts :    {type: Object}
+  comments :    { type: Object },
+  isApproved:   { type: Number, default: 0}
 });
-restaurantSchema.plugin(passportLocalMongoose);
+
 var Restaurant = module.exports = mongoose.model('Restaurant', restaurantSchema);
 module.exports = Restaurant;
