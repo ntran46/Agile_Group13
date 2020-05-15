@@ -1,14 +1,13 @@
 // Import the dependencies for testing
 var mongoose = require("mongoose");
-// mongoose.connect('mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb')
 var mongodb = mongoose.connection;
-// mongodb.on('error', console.error);
 var Schema = mongoose.Schema;
-
 process.env.NODE_ENV = 'test';
 
 let User = require('../Models/User');
 let Restaurant = require('../Models/Restaurant');
+const RestaurantRepo = require('../Data/RestaurantRepo');
+const _RestaurantRepo = new RestaurantRepo();
 var chai = require('chai')
 var chaiHttp = require('chai-http');
 var app = require('../app.js');
@@ -46,7 +45,21 @@ userObject1 = {
     'txtEmpPhone': '(604) 434-5734'
 }
 
-// Valid user object - same username as `userObject`
+userObject7 = {
+    'username': 'MarT',
+    'firstname': 'bcit',
+    'lastname': 'school',
+    'email': 'mtaer@my.bcit.ca',
+    'password': 'P@ssw0rd',
+    'passwordConfirm': 'P@ssw0rd',
+    'gender': 'Female',
+    'address': '555 Seymour St, Vancouver, BC',
+    'zipcode': 'V6B 3H6',
+    'txtEmpPhone': '(604) 434-5734'
+}
+
+
+// InValid user object - same username as `userObject`
 userObject2 = {
     'username': 'bcit.ca',
     'firstname': 'testing',
@@ -60,7 +73,7 @@ userObject2 = {
     'txtEmpPhone': '(604) 434-5734'
 }
 
-// Valid user object - same email as `userObject`
+// InValid user object - same email as `userObject`
 userObject3 = {
     'username': 'MT',
     'firstname': 'maryam',
@@ -116,6 +129,7 @@ userObject6 = {
     'txtEmpPhone': '(604) 434-5734'
 }
 
+//----------------------------------------------------------------------------------------
 // valid restaurant object
 restObject = {
     'restaurantName': 'yelp',
@@ -130,7 +144,7 @@ restObject = {
 
 // valid restaurant object
 restObject1 = {
-    'restaurantName': 'yelpTest_1',
+    'restaurantName': 'yelpTest',
     'email': 'yelpme@hotmail.ca',
     'city': 'vancouver',
     'strAddress': '555 Seymour St',
@@ -140,7 +154,18 @@ restObject1 = {
     'description': 'Please register me again',
 }
 
-// Valid user object - same phone number as `restObject`
+restObject5 = {
+    'restaurantName': 'yelp',
+    'email': 'yelp123@you.ca',
+    'city': 'vancouver',
+    'strAddress': '555 Seymour St',
+    'phoneNo': '(238) 402-1209',
+    'zipcode': 'V6B 3H6',
+    'license': 'OASDHU_SDF56S',
+    'description': 'Please register me',
+}
+
+// InValid user object - same phone number as `restObject`
 restObject2 = {
     'restaurantName': 'yelp',
     'email': 'yelp@my.protal.com',
@@ -152,7 +177,7 @@ restObject2 = {
     'description': 'Please register me',
 }
 
-// Valid user object - same licence as `restObject`
+// InValid user object - same licence as `restObject`
 restObject3 = {
     'restaurantName': 'yelpTest',
     'email': 'yelp@protal.ca',
@@ -165,7 +190,7 @@ restObject3 = {
 
 }
 
-// Valid user object - same email as `restObject`
+// InValid user object - same email as `restObject`
 restObject4 = {
     'restaurantName': 'yelpTest',
     'email': 'yelp@my.protal.ca',
@@ -178,140 +203,248 @@ restObject4 = {
 
 }
 
+// describe('Reviews - Details of a Review', () => {
 
-// describe("Normal Users - Register", () => {
 //     before((done) => {
 //         chai.request(app)
-//             .post(`/User/RegisterUser`)
-//             .send(userObject)
+//             .post(`/Restaurant/RegisterRestaurant`)
+//             .send(restObject5)
 //             .end((err, res) => {
 //                 expect(res.status).to.equal(200);
-//                 expect(res.body.Message).to.equal('Registered successfully');
+//                 expect(res.body.restaurant).to.have.property('phoneNo', '(238) 402-1209');
+//                 expect(res.body.restaurant).to.have.property('license', 'OASDHU_SDF56S');
+//                 expect(res.body.restaurant).to.have.property('email', 'yelp123@you.ca');
+//                 console.log(res.body.restaurant._id)
 //                 done();
 //             });
 //     });
 
-//     describe("[POST] user - Register", () => {
+//     before((done) => {
+//         chai.request(app)
+//             .post(`/User/RegisterUser`)
+//             .send(userObject7)
+//             .end((err, res) => {
+//                 expect(res.status).to.equal(200);
+//                 expect(res.body.Message).to.equal('Registered successfully');
+//                 expect(res.body.errorMessage).to.equal('');
+//                 done();
+//             });
+//     });
 
-//         it("1) Test a POST request to create a new user.", (done) => {
+//     before((done) => {
+//         objectTemp = { "username": "MarT", "password": "P@ssw0rd" }
+//         chai.request(app)
+//             .post(`/auth`)
+//             .send(objectTemp)
+//             .end((err, res) => {
+//                 // expect(res.status).to.equal(200)
+//                 if (res.body.token) {
+//                     console.log("User logged in")
+//                 }
+//                 else {
+//                     console.log("Dennied access")
+//                 }
+//                 done();
+//             });
+//     });
+
+//     describe("[POST] user - Review", () => {
+//         it("1) Test a POST request to create a review.", (done) => {
+//             let restObj = Restaurant.findOne({email: restObject5.email}).exec()
+//             // let restObj = _RestaurantRepo.getRestaurantByEmail(restObject5.email)
+//             let reviewObj = { "username": "test", "review": "The meal was great!", "rating": "5", "_id": restObj._id }
+
 //             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject1)
+//                 .post(`/Restaurant/WriteReviews`)
+//                 .send(reviewObj)
+//                 .end((err, res) => {
+//                     expect(res.status).to.equal(200);
+//                     console.log(res.body.errorMessage)
+//                     // expect(res.body.errorMessage).to.equal('');
+//                     // expect(res.body.Message).to.equal('The review was saved successfully!')
+//                     done();
+//                 });
+//         });
+//     });
+
+//     describe("Show Details of Reviews for Restaurants", () => {
+
+//         it("1) Test a POST request to receive details on a review for a restaurant.", (done) => {
+//             chai.request(app)
+//                 .post(`/Restaurant/ReviewDetail`)
+//                 .send(restObject4)
 //                 .end((err, res) => {
 //                     expect(res.status).to.equal(200)
 //                     expect(res.body).to.be.a('object')
 //                     expect(res.body).not.to.be.empty;
-//                     expect(res.body.user).to.have.property('username', 'bcit.ca')
-//                     expect(res.body.user).to.have.property('email', 'bcit@bcit.ca')
+//                     expect(res.body.restaurant).to.have.property('restaurantName', 'Sushi Twon');
+//                     expect(res.body.restaurant).to.have.property('email', 'sushi_twon@my.protal.ca');
+//                     // expect(res.body.restaurant).to.have.property('review', 'Sushi Twon')
+//                     // expect(res.body.restaurant).to.have.property('ratings', 'Sushi Twon')
 //                     done();
-//                 });
-//         });
-
-//         it("2) Should not create a user with an in-use username.", (done) => {
-//             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject2)
-//                 .end((err, res) => {
-//                     expect(res.body.errorMessage.name).to.equal('UserExistsError')
-//                     done();
-//                 });
-//         });
-
-//         it("3) Should not create a new user with an in-use email address.", (done) => {
-//             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject3)
-//                 .end((err, res) => {
-//                     expect(res.status).to.equal(200)
-//                     expect(res.body.errorMessage.name).to.equal('MongoError')
-//                     done();
-//                 });
-//         });
-
-//         it("4) Should not create a new user with an invalid password (not at least 8 character && no upper case).", (done) => {
-//             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject4)
-//                 .end((err, res) => {
-//                     expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
-//                     done();
-//                 });
-//         });
-
-//         it("5) Should not create a new user with an invalid password (no number && no symbol).", (done) => {
-//             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject5)
-//                 .end((err, res) => {
-//                     expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
-//                     done();
-//                 });
-//         });
-
-//         it("6) Should not create a new user when password doesn't match the confirm password.", (done) => {
-//             chai.request(app)
-//                 .post(`/User/RegisterUser`)
-//                 .send(userObject6)
-//                 .end((err, res) => {
-//                     expect(res.body.errorMessage).to.equal("Passwords do not match.")
-//                     done();
-//                     console.log()
-//                     console.log("-------------------------------------------------")
-//                     console.log("-------------------------------------------------")
-
-//                 });
-//         });
-
-
-//     });
-// });
-
-// describe('Users - Login', () => {
-//     before((done) => {
-//         chai.request(app)
-//             .post(`/User/RegisterUser`)
-//             .send(userObject1)
-//             .end((err, res) => {
-//                 expect(res.status).to.equal(200)
-//                 done();
-//             });
-//     });
-
-//     describe("[POST, GET] Normal User - Login", () => {
-
-//         it("1) Test a POST request to login with an existing user.", (done) => {
-//             objectTemp ={"username":"bcit.ca", "password": "P@ssw0rd"}
-//             chai.request(app)
-//                 .post(`/auth`)
-//                 .send(objectTemp)
-//                 .end((err, res) => {
-//                     expect(res.status).to.equal(200)
-//                     if (res.body.token){
-//                         console.log("User logged in")
-//                     }
-//                     else{
-//                         console.log("Dennied access")
-//                     }
-//                     done();
-//             });
-//         });
-
-//         it("2) Test a POST request to login with an non-existing user.", (done) => {
-//             objectTemp ={"username":"bcit.ca.com", "password": "P@ssw0rd"}
-//             chai.request(app)
-//                 .post(`/auth`)
-//                 .send(objectTemp)
-//                 .end((err, res) => {
-//                     expect(res.status).to.equal(401)
-//                     console.log(res.text)
-//                     done();
-//                     console.log()
-//                     console.log("-------------------------------------------------")
-//                     console.log("-------------------------------------------------")
 //                 });
 //         });
 //     });
 // });
+
+
+describe("Normal Users - Register", () => {
+    before((done) => {
+        chai.request(app)
+            .post(`/User/RegisterUser`)
+            .send(userObject)
+            .end((err, res) => {
+                expect(res.status).to.equal(200);
+                expect(res.body.Message).to.equal('Registered successfully');
+                done();
+            });
+    });
+
+    after((done) => {
+        mongodb.db.dropCollection("users", function(err, result) { console.log(result); }); 
+        // User.removeAllListeners({"address": "555 Seymour St, Vancouver, BC"}, function(err, result) { console.log(result); })
+        done();
+    });
+
+
+    describe("[POST] user - Register", () => {
+
+        it("1) Test a POST request to create a new user.", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject1)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200)
+                    expect(res.body).to.be.a('object')
+                    expect(res.body).not.to.be.empty;
+                    expect(res.body.user).to.have.property('username', 'bcit.ca')
+                    expect(res.body.user).to.have.property('email', 'bcit@bcit.ca')
+                    done();
+                });
+        });
+
+        it("2) Test a GET request to receive a user object.", (done) => {
+            chai.request(app)
+                .get(`/User/Index`)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200)
+                    expect(res.body.users).to.not.be.null;
+                    done();
+                });
+        });
+
+
+        it("3) Should not create a user with an in-use username.", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject2)
+                .end((err, res) => {
+                    expect(res.body.errorMessage.name).to.equal('UserExistsError')
+                    done();
+                });
+        });
+
+        it("4) Should not create a new user with an in-use email address.", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject3)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200)
+                    expect(res.body.errorMessage.name).to.equal('MongoError')
+                    done();
+                });
+        });
+
+        it("5) Should not create a new user with an invalid password (not at least 8 character && no upper case).", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject4)
+                .end((err, res) => {
+                    expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
+                    done();
+                });
+        });
+
+        it("6) Should not create a new user with an invalid password (no number && no symbol).", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject5)
+                .end((err, res) => {
+                    expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
+                    done();
+                });
+        });
+
+        it("7) Should not create a new user when password doesn't match the confirm password.", (done) => {
+            chai.request(app)
+                .post(`/User/RegisterUser`)
+                .send(userObject6)
+                .end((err, res) => {
+                    expect(res.body.errorMessage).to.equal("Passwords do not match.")
+                    done();
+                    console.log()
+                    console.log("-------------------------------------------------")
+                    console.log("-------------------------------------------------")
+
+                });
+        });
+
+
+    });
+});
+
+describe('Users - Login', () => {
+    before((done) => {
+        chai.request(app)
+            .post(`/User/RegisterUser`)
+            .send(userObject1)
+            .end((err, res) => {
+                expect(res.status).to.equal(200)
+                done();
+            });
+    });
+
+    after((done) => {
+        mongodb.db.dropCollection("users", function(err, result) { console.log(result); }); 
+        done();
+    });
+
+
+    describe("[POST, GET] Normal User - Login", () => {
+
+        it("1) Test a POST request to login with an existing user.", (done) => {
+            objectTemp = { "username": "bcit.ca", "password": "P@ssw0rd" }
+            chai.request(app)
+                .post(`/auth`)
+                .send(objectTemp)
+                .end((err, res) => {
+                    expect(res.status).to.equal(200)
+                    if (res.body.token) {
+                        console.log("User logged in")
+                    }
+                    else {
+                        console.log("Dennied access")
+                    }
+                    done();
+                });
+        });
+
+        it("2) Test a POST request to login with an non-existing user.", (done) => {
+            objectTemp = { "username": "bcit.ca.com", "password": "P@ssw0rd" }
+            chai.request(app)
+                .post(`/auth`)
+                .send(objectTemp)
+                .end((err, res) => {
+                    expect(res.status).to.equal(401)
+                    console.log(res.text)
+                    done();
+                    console.log()
+                    console.log("-------------------------------------------------")
+                    console.log("-------------------------------------------------")
+                });
+        });
+    });
+});
 
 describe("Restaurant - Register", () => {
     before((done) => {
@@ -326,13 +459,11 @@ describe("Restaurant - Register", () => {
             });
     });
 
-    // after((done) => {
-    //     // mongodb.collections['restaurants'].remove().exec();
-    //     mongodb.db.dropCollection("restaurants", function(err, result) { console.log(err); });
-    //     mongoose.disconnect();
-    //     // mongodb.then(function(result) { console.log(result) });
-    //     done();
-    // });
+    after((done) => {
+        mongodb.db.dropCollection("restaurants", function(err, result) { console.log(result); });
+        // Restaurant.findOneAndDelete({$or: [{"restaurantName": "yelpTest"}, {"restaurantName": "yelp"}]}).exec()
+        done();
+    });
 
     describe("/POST restaurant - Register", () => {
 
@@ -387,3 +518,4 @@ describe("Restaurant - Register", () => {
 
     });
 });
+

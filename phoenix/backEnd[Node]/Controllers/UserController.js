@@ -52,7 +52,7 @@ exports.RegisterUser  = async function(req, res){
                             reqInfo: reqInfo
                         });
                     }
-                    return res.json({ Message: "Registered successfully", user: newUser, reqInfo: reqInfo });
+                    return res.json({ Message: "Registered successfully", errorMessage: "", user: newUser, reqInfo: reqInfo });
                 });
         }
         else {

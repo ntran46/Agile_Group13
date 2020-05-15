@@ -1,8 +1,8 @@
-const Restaurant     = require('../Models/Restaurant');
-var   passport       = require('passport');
-const RequestService = require('../Services/RequestService');
-const RestaurantRepo       = require('../Data/RestaurantRepo');
-const _RestaurantRepo      = new RestaurantRepo();
+const Restaurant       = require('../Models/Restaurant');
+var   passport         = require('passport');
+const RequestService   = require('../Services/RequestService');
+const RestaurantRepo   = require('../Data/RestaurantRepo');
+const _RestaurantRepo  = new RestaurantRepo();
 
 
 exports.Update = async function(request, response){
@@ -30,14 +30,14 @@ exports.Register = async function(req, res) {
 
 exports.WriteReviews = async function(request, response) {
     let RestaurantID = request.body._id;
-    let RESObj     = await _RestaurantRepo.getRestaurantByID(RestaurantID);
+    let RESObj       = await _RestaurantRepo.getRestaurantByID(RestaurantID);
    
     let reqInfo    = RequestService.reqHelper(request);
     let username   = request.body.username;
     let rating     = request.body.rating;
     let review     = request.body.review;
 
-    let tempReviewObj = createTempObj(RESObj, username,rating,review);
+    let tempReviewObj  = createTempObj(RESObj, username,rating,review);
     let responseObject = await _RestaurantRepo.updateReview(tempReviewObj, username,"Create");
     let myReviews      = await _RestaurantRepo.getMyReview(username);
 
@@ -192,7 +192,6 @@ exports.LoginUser = async function(req, res, next) {
     }) (req, res, next);
   };
   
-
 // Log user out and direct them to the login screen.
 exports.Logout = (req, res) => {
     req.logout();
@@ -201,7 +200,6 @@ exports.Logout = (req, res) => {
     res.render('Restaurant/Login', { Restaurant:{}, isLoggedIn:false, errorMessage : "", 
                                reqInfo:reqInfo});
 };
-
 
 // This displays a view called 'securearea' but only 
 // if user is authenticated.
