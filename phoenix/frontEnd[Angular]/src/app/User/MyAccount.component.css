@@ -1,0 +1,6 @@
+.View {
+  display: inline;
+}
+.Edit {
+  visibility: hidden;
+}
