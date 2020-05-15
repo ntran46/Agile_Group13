@@ -1,8 +1,8 @@
 
-<div class="container-fluid login-body">
+<div class="container-fluid bg-faded login-body">
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-6 this">
           
           <div class="login-wrap">
             <div class="login-html">
@@ -18,7 +18,7 @@
                   <div class="group">
                     <label for="pass" class="label">Password</label>
                     <input type="password"  class="input_pass pwd input" [type]="hide ? 'password' : 'text'"
-                  [(ngModel)]="_password" name="_password" required >
+                  [(ngModel)]="_password" name="_password" required>
                   </div>
                   <div class="group">
                     <input type="submit" class="button login-btn" value="Sign In" (click)="login()">

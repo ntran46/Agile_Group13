@@ -7,7 +7,7 @@ var engine        = require('ejs-locals');
 var bodyParser    = require('body-parser');
 var LocalStrategy = require('passport-local').Strategy;
 const DB_URI      = 'mongodb://localhost:27017/phoenix';
-let options       = { useNewUrlParser: true  };
+let options       = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose.connect(DB_URI, options);
 
 var app  = express();

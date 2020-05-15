@@ -94,6 +94,55 @@ exports.Logout = (req, res) => {
                                reqInfo:reqInfo});
 };
 
+exports.Delete = async function(request, response) {
+    let email           = request.body.email;
+    let deletedItem  = await _userRepo.delete(email);
+
+    // Some debug data to ensure the item is deleted.
+    console.log(JSON.stringify(deletedItem));
+    let users     = await _userRepo.allUsers();
+    response.json( {users:users});
+}
+
+exports.MyAccount = async function(request, response) {
+    // request.query used to get url parameter.
+    let username  = request.query.username; 
+    
+    let UserObj = await _userRepo.getUser(username);
+    response.json( { user:UserObj });
+}
+
+// Receives posted data that is used to update the item.
+exports.EditMyAccount = async function(request, response) {
+    let username = request.body.username;
+    console.log("The Username is: " + username);
+
+    let tempUserObj  = new User( {
+        "username"   : request.body.username,
+        "firstName"  : request.body.firstname,
+        "lastName"   : request.body.lastname,
+        "email"      : request.body.email,
+        "address"    : request.body.address,
+        "zipcode"    : request.body.zipcode,
+        "txtEmpPhone": request.body.txtEmpPhone
+    });
+
+    // Call update() function in repository with the object.
+    let responseObject = await _userRepo.update(tempUserObj, "Update");
+
+    // Update was successful. Show detail page with updated object.
+    if(responseObject.errorMessage == "") {
+        response.json({ event:responseObject.obj,
+                                            errorMessage:"" });
+    }
+
+    // Update not successful. Show edit form again.
+    else {
+        response.json( {
+            event:      responseObject.obj,
+            errorMessage: responseObject.errorMessage });
+    }
+};
 
 // This displays a view called 'securearea' but only 
 // if user is authenticated.

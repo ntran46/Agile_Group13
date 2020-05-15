@@ -1,5 +1,5 @@
 var mongoose              = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
+// var passportLocalMongoose = require('passport-local-mongoose');
 
 
 var restaurantSchema = mongoose.Schema({
@@ -16,6 +16,6 @@ var restaurantSchema = mongoose.Schema({
   employees:    { type: Object },
   commemts :    {type: Object}
 });
-restaurantSchema.plugin(passportLocalMongoose);
+// restaurantSchema.plugin(passportLocalMongoose);
 var Restaurant = module.exports = mongoose.model('Restaurant', restaurantSchema);
 module.exports = Restaurant;
