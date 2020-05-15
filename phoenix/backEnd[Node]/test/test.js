@@ -186,7 +186,7 @@ describe("Normal Users - Register", () => {
             .send(userObject)
             .end((err, res) => {
                 expect(res.status).to.equal(200);
-                expect(res.body.Message).to.equal('Register successfully');
+                expect(res.body.Message).to.equal('Registered successfully');
                 done();
             });
     });
