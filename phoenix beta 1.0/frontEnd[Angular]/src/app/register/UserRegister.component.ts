@@ -18,8 +18,8 @@ export class UserRegisterComponent implements OnInit {
   _firstname: String;
   _lastname: String;
   _email: String;
-  _password: any;
-  _confirm: any;
+  _password: any = 'P@ssw0rd';
+  _confirm: any= 'P@ssw0rd';
   _gender: any;
   _address: string = '';
   _zipcode: any = '';

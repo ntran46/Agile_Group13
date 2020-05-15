@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {MatTableDataSource} from '@angular/material/table';
+import { AppComponent } from '../app.component'
+
 
 const BASE_URL = "http://localhost:1337/User/";
 
@@ -14,11 +15,11 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
   templateUrl:'./MyAccount.component.html',
-  // styleUrls: ['./Management.component.css']
+  styleUrls: ['./MyAccount.component.css']
   
 })
 export class MyAccountComponent { 
-  _UserArray: Array<any>;
+  _UserArray: any;
   _role: String;
   _username: String;
   _firstname: String;
@@ -30,38 +31,53 @@ export class MyAccountComponent {
   _address: string;
   _zipcode: any;
   _txtEmpPhone: any;
-  _reqInfo: any;
+  reqInfo: any;
   _http:HttpClient;
+  token         = '';
   _errorMessage:String = "";
-  position: number;
-  displayedColumns: string[] = ['username', 'firstname', 'lastname', 'txtEmpPhone'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, AppComponent:AppComponent) {
       this._http = http;
-      this.getAllUsers();
+      this.showContentIfLoggedIn()
+
+    }
+
+    showContentIfLoggedIn() {
+      // Logged in if token exists in browser cache.
+      if(sessionStorage.getItem('auth_token')!=null) {
+          this.token   = sessionStorage.getItem('auth_token');
+          this._UserArray = JSON.parse(sessionStorage.user)
+      }
+      else {
+          this.token   = ''
+          alert("Unauthorized Area");
+          window.location.href = './login';
+      }
+  }
+
+    Submit() {
+      // let url = BASE_URL + 'EditMyAccount'
+      // this._http.post(url, )
+      //     // Get data and wait for result.
+      //     .subscribe(result => {
+      //         this._UserArray = result.users;
+
+      //     },
+  
+      //     error =>{
+      //       console.log(JSON.stringify(error));
+      //       this._errorMessage = error;
+      //     })
     }
 
 
-  
-    applyFilter(event: Event) {
-      const filterValue = (event.target as HTMLInputElement).value;
-      this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
+    Edit() {
+      this.showContentIfLoggedIn()
+      document.getElementById("View").style.display = "none";
+      document.getElementById("Edit").style.display ="inline";
+      
+ 
 
-    getAllUsers() {
-      let url = BASE_URL + 'Index'
-      this._http.get<any>(url)
-          // Get data and wait for result.
-          .subscribe(result => {
-              this._UserArray = result.users;
-              console.log(this._UserArray)
-          },
-  
-          error =>{
-            // Let user know about the error.
-              this._errorMessage = error;
-          })
     }
     
 }

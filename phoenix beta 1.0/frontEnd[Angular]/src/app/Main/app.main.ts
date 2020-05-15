@@ -7,7 +7,7 @@ import {Location } from "@angular/common";
 @Component({
     selector: 'app-login',
     templateUrl:`./main.html`,
-    styleUrls: ['../app.component.css']
+    styleUrls: ['./main.css']
 })
 
 export class MainComponent {

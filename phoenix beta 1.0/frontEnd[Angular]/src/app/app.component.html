@@ -1,53 +1,115 @@
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light sticky-top navigation-bar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="img-fluid" alt="Responsive image" src="../assets/logo.png"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-faded navbar-dark" role="navigation">
+      
+        <!-- <div class="navbar-header"> -->
+          <!-- navbar logo -->
+          <a class="navbar-brand" href="#"><img class="img-fluid" alt="Responsive image" src="../assets/logo.png"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+        <!-- </div> -->
+        
+
+        <!-- navbar minus logo -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto" *ngIf="!reqInfo.authenticated">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/UserManagement"  routerLinkActive="active">Test</a>
-            </li>
+
+          <!-- items if not authenticated/ public -->
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="!reqInfo.authenticated">
             <li class="nav-item">
               <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
             </li>
     
             <li class="nav-item">
-              <a class="nav-link"  routerLink="/UserRegister"  routerLinkActive="active">User Register</a>
+              <a class="nav-link"  routerLink="/UserRegister"  routerLinkActive="active">Sign Up</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link"  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link"   routerLink="/login">Login</a>
             </li>
           </ul>
-          <ul class="navbar-nav ml-auto" *ngIf="reqInfo.authenticated">
-            
-            <div *ngIf="reqInfo.roles.includes('Manager')">
-              <a  mat-button  routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
-              <a  mat-button  routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
-              <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
-            </div>
-      
-            <div *ngIf="!reqInfo.roles.includes('Manager')">
-              <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
-              <a  mat-button  routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
-              <a  mat-button  routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
-              <a  mat-button  routerLink="/MyAccount"  routerLinkActive="active">Account Setting</a>
-              <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
-            </div>
-      
-          </ul>
+
+          <!-- navbar if authenticated / users or managers -->
+
+            <!-- Manager -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && reqInfo.roles.includes('Manager')">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
+              </li>
+            </ul>
+
+            <!-- User -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && !reqInfo.roles.includes('Manager')">
+              
+              <li class="nav-item">
+                <a class="nav-link"  routerLink="/Main"  routerLinkActive="active">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account
+                </a>
+                <div class="dropdown-menu  dropTable" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="row">
+                        <div class="col-md-5">
+                          <img src="../assets/dance.gif" style="width: 100px; height: 100px;">
+                        </div>
+                        <div class="col-md-7">
+                            <p>Username: {{reqInfo.username}}</p>
+                            <p>Email: {{reqInfo.email}}</p>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3"></div>
+                      <div class="col-md-3">
+                          <a href="#" (click)='logout()' class="btn btn-primary btn-sm">
+                            Logout</a>
+                      </div>
+
+                      <div class="col-md-6 justify-content-center">
+                        <a routerLink="/MyAccount"  routerLinkActive="active" class="btn btn-primary btn-sm active">
+                          View or Change Profile</a>
+                      </div>
+                      <div class="col-md-3"></div>
+                    </div>
+                  </div>
+              </li>
+              
+            </ul>
+
       </div>
         
-      </div>
+
     </nav>
 
-    <router-outlet></router-outlet>
-  </body>
-  
+  <!-- router container -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-1"></div>
+
+      <div class="col-10">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-1"></div>
+
+    </div>
+    <!-- router body -->
     
+  </div>
+</body>
+    
+   

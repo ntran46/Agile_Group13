@@ -15,6 +15,9 @@ module.exports = function(app){
     app.get('/User/Logout', UserController.Logout);
     app.get('/User/SecureArea', UserController.SecureArea);
     app.get('/User/ManagerArea', UserController.ManagerArea);
+    app.delete('/User/Delete', cors(), UserController.Delete);
+    app.post('/User/EditMyAccount', cors(), UserController.EditMyAccount);
+    app.get('/User/MyAccount', cors(), UserController.MyAccount);
 
     app.get('/Restaurant/Index', cors(), RestaurantController.Index);
     app.get('/Restaurant/Register', RestaurantController.Register);
