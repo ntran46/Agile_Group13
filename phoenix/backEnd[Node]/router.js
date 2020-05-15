@@ -20,10 +20,23 @@ module.exports = function(app){
     app.get('/User/MyAccount', cors(), UserController.MyAccount);
 
     app.get('/Restaurant/Index', cors(), RestaurantController.Index);
+    app.get('/Restaurant/ReviewDetail', cors(), RestaurantController.ReviewDetail);
+    app.post('/Restaurant/WriteReviews', RestaurantController.WriteReviews);
+    app.post('/Restaurant/Update', RestaurantController.Update);
     app.get('/Restaurant/Register', RestaurantController.Register);
     app.post('/Restaurant/RegisterRestaurant', RestaurantController.RegisterRestaurant);
     app.delete('/Restaurant/Delete', cors(), RestaurantController.Delete);
 
+    // app.get('/Orders/Index', cors(), OrderHistoryController.Index);
+    // app.post('/Orders/AddOrder', cors(), OrderHistoryController.AddOrder);
+
+    // app.get('/Movie/ReviewDetail', MovieController.ReviewDetail);
+    // app.get('/Movie/WriteReviews', MovieController.WriteReviews);
+    // app.get('/Movie/MyReviews', MovieController.MyReviews);
+    // app.post('/Movie/UpdateMyReview', MovieController.UpdateMyReview);
+    // app.get('/Movie/EditMyReview', MovieController.EditMyReview);
+    // app.post('/Movie/CreateReview', MovieController.CreateReview);
+    // app.post('/Movie/DeleteReview', MovieController.DeleteReview);
 
     // Sign in for user
     app.post(

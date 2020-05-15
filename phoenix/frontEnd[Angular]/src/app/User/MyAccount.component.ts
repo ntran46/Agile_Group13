@@ -19,6 +19,7 @@ const ELEMENT_DATA: PeriodicElement[] = [];
   
 })
 export class MyAccountComponent { 
+  selectedGender: string = "male";
   _UserArray: any;
   _role: String;
   _username: String;
@@ -39,11 +40,10 @@ export class MyAccountComponent {
   constructor(private http: HttpClient, AppComponent:AppComponent) {
       this._http = http;
       this.showContentIfLoggedIn()
-
+      // setTimeout(() => {this.View();}, 200)
     }
 
     showContentIfLoggedIn() {
-      // Logged in if token exists in browser cache.
       if(sessionStorage.getItem('auth_token')!=null) {
           this.token   = sessionStorage.getItem('auth_token');
           this._UserArray = JSON.parse(sessionStorage.user)
@@ -70,14 +70,30 @@ export class MyAccountComponent {
       //     })
     }
 
+    View(){
+      document.getElementById("Save").style.visibility='visible'
+      document.getElementById("Cancel").style.visibility='visible'
+      document.getElementById("ViewTable").style.display='none'
+      document.getElementById("EditTable").style.display='inline'
+      document.getElementById("View").style.visibility='hidden'
+
+
+    }
 
     Edit() {
+
       this.showContentIfLoggedIn()
       document.getElementById("View").style.display = "none";
       document.getElementById("Edit").style.display ="inline";
-      
- 
+    }
 
+    Cancel() {
+      this.showContentIfLoggedIn()
+      document.getElementById("ViewTable").style.display='inline'
+      document.getElementById("EditTable").style.display='none'
+      document.getElementById("View").style.visibility='visible'
+      document.getElementById("Save").style.visibility='hidden'
+      document.getElementById("Cancel").style.visibility='hidden'
     }
     
 }

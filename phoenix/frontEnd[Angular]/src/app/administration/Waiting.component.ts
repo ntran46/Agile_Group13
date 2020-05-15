@@ -37,12 +37,12 @@ export class WaitingListComponent {
         let url = this.site + 'Restaurant/Index'
         this._http.get<any>(url)
             .subscribe(result => {
+                this._RestaurantItem = [];
                 for (var i =0; i<result.restaurants.length; i++){
                     if (result.restaurants[i][0].isApproved == 0){
                         this._RestaurantItem.push(result.restaurants[i][0])
                     }
                 }
-                console.log(this._RestaurantItem)
             }, 
             error =>{
                 this._errorMessage = error;
@@ -50,8 +50,11 @@ export class WaitingListComponent {
     }
 
     updateWaitingItem(email, action, ID) {
-        var checkBox = document.getElementById(ID) as HTMLInputElement;
+
+        var checkBox = document.getElementById(ID).querySelectorAll('input')
         let _isApproved = 0;
+        let _validationCheck = []
+
         if (action == 'Approved'){
             _isApproved = 1
         }
@@ -59,7 +62,13 @@ export class WaitingListComponent {
             _isApproved = 2
         }
 
-        if(checkBox.checked){
+        for (var i =0; i < checkBox.length; i++){
+            if (! checkBox[i].checked){
+                _validationCheck.push(checkBox[i])
+            }
+        }
+
+        if(_validationCheck.length == 0){
 
             let url = this.site + "Restaurant/Update"
             this.http.post(url, 
@@ -81,7 +90,6 @@ export class WaitingListComponent {
         else{
             alert("All conditions should be checked before approving")
         }
-
     }
      
     getSecureData() {  

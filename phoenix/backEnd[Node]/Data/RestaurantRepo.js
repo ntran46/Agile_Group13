@@ -31,16 +31,6 @@ class RestaurantRepo {
         }
     }
 
-    async getRestaurantByLicence(license) {
-        var restaurant = await Restaurant.findOne({license: license});
-        if(restaurant) {
-            let respose = { obj: restaurant, errorMessage:"" }
-            return respose;
-        }
-        else {
-            return null;
-        }
-    }
 
     async create(RestaurantObj) {
         try {

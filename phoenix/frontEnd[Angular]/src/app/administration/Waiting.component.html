@@ -19,25 +19,25 @@
                 <td style="width: 3cm;"><b>Phone Number</b></td>
                 <td style="width: 3cm;"><b>Food License</b></td>
             </tr>
-            <tr>
+            <tr id='{{res._id}}'>
                 
                 <td>
-                    <input type="checkbox" id='{{res._id}}' name="locationChecked" ng-model=res._id>
+                    <input type="checkbox" id='{{res.restaurantName}}' name="nameCheked" >
                     {{res.restaurantName}}
                     
                 </td>
                 <td></td>
                 <td>
-                    <input type="checkbox" id='{{res._id}}' name="locationChecked" ng-model=res._id>
+                    <input type="checkbox" id='{{res.strAddress}}' name="nameCheked" ng-model=res._id>
                     {{res.strAddress}}, {{res.city}}, {{res.zipcode}}
                 </td>
                 <td></td>
                 <td>
-                    <input type="checkbox" id='{{res._id}}' name="phoneChecked" ng-model=res._id>
+                    <input type="checkbox" id='{{res.phoneNo}}' name="nameCheked" ng-model=res._id>
                     {{res.phoneNo}}
                 </td>
                 <td>
-                    <input type="checkbox" id='{{res._id}}' name="licenseChecked" ng-model=res._id>
+                    <input type="checkbox" id='{{res.license}}' name="nameCheked" ng-model=res._id>
                     {{res.license}}
 
                 </td>

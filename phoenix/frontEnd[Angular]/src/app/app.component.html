@@ -1,53 +1,42 @@
-<body>
+<mat-toolbar  color="primary"  class="fixed-header">
+  <mat-toolbar-row>
+    <span><img  src="../assets/logo.png"  style="width:50px;"></span>
 
-    <nav class="navbar navbar-expand-md navbar-light sticky-top navigation-bar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="img-fluid" alt="Responsive image" src="../assets/logo.png"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto" *ngIf="!reqInfo.authenticated">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/UserManagement"  routerLinkActive="active">Test</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
-            </li>
-    
-            <li class="nav-item">
-              <a class="nav-link"  routerLink="/UserRegister"  routerLinkActive="active">User Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"   routerLink="/login">Login</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto" *ngIf="reqInfo.authenticated">
-            
-            <div *ngIf="reqInfo.roles.includes('Manager')">
-              <a  mat-button  routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
-              <a  mat-button  routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
-              <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
-            </div>
+    <div *ngIf="!reqInfo.authenticated">
+      <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
+      <a  mat-button  routerLink="/UserRegister"  routerLinkActive="active">User Register</a>
+      <a  mat-button  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
+      <a  mat-button  routerLink="/login">Login</a>
+    </div>
+    <div *ngIf="reqInfo.authenticated">
       
-            <div *ngIf="!reqInfo.roles.includes('Manager')">
-              <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
-              <a  mat-button  routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
-              <a  mat-button  routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
-              <a  mat-button  routerLink="/MyAccount"  routerLinkActive="active">Account Setting</a>
-              <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
-            </div>
-      
-          </ul>
+      <div *ngIf="reqInfo.roles.includes('Manager')">
+        <a  mat-button  routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
+        <a  mat-button  routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
+        <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
       </div>
-        
-      </div>
-    </nav>
 
-    <router-outlet></router-outlet>
-  </body>
-  
-    
+      <div *ngIf="!reqInfo.roles.includes('Manager') && !reqInfo.roles.includes('restaurantOwner')">
+        <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
+        <a  mat-button  routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+        <a  mat-button  routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
+        <a  mat-button  routerLink="/MyAccount"  routerLinkActive="active">Account Setting</a>
+        <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
+      </div>
+
+      <div *ngIf="reqInfo.roles.includes('restaurantOwner')">
+        <a  mat-button  routerLink="/Main"  routerLinkActive="active">Home</a>
+        <a  mat-button  routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+        <a  mat-button  routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
+        <a  mat-button  routerLink="/Menu"  routerLinkActive="active">Menu</a>
+        <a  mat-button  routerLink="/MyAccount"  routerLinkActive="active">Restaurant Info</a>
+        <a  mat-button  href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a> 
+      </div>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+  <main>
+  <router-outlet  style="margin-top: 80px;"></router-outlet>
+  </main>

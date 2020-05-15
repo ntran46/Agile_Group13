@@ -16,7 +16,7 @@ export class LoginComponent {
   hide = true;
   _http:HttpClient;
   _username: String;
-  _password: String;
+  _password: String ='P@ssw0rd';
   _token    = '';
   _errorMessage:String = "";
   message  = 'Not logged in.';
@@ -47,7 +47,7 @@ export class LoginComponent {
             sessionStorage.setItem('roles', JSON.stringify(data["user"]["roles"]))
            
             this.message = "The user has been logged in.";
-            window.location.href = 'http://localhost:4200/';
+            window.location.href = 'http://localhost:4200/Main';
           }
         },
         // An error occurred. Data is not received. 

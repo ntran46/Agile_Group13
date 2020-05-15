@@ -59,12 +59,13 @@ export class RestaurantRegisterComponent implements OnInit {
             console.log("POST call successful. Inspect response.", JSON.stringify(data));
             window.location.href = 'http://localhost:4200/Main';
             this._errorMessage = data["errorMessage"];
+
             console.log(this._errorMessage)
         },
         // An error occurred. Data is not received.
         error => {
             this._errorMessage = error;
-            console.log(error)
+            alert(error)
         });
   }
 

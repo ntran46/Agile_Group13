@@ -30,17 +30,6 @@ class UserRepo {
         }
     } 
     
-    async getUserByEmail(email) {
-        var user = await User.findOne({email: email});
-        if(user) {
-            let respose = { obj: user, errorMessage:"" }
-            return respose;
-        }
-        else {
-            return null;
-        }
-    }
-
     async update(editedObj, action) {   
     
         let response = {

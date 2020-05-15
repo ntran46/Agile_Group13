@@ -23,43 +23,46 @@ exports.Register = async function(req, res) {
 
 // Handles 'POST' with registration form submission.
 exports.RegisterUser  = async function(req, res){
-    var password = req.body.password;
+   
+    var password        = req.body.password;
     var passwordConfirm = req.body.passwordConfirm;
-    var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
+    var pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;  
 
     if (password.match(pattern)) {
         if (password == passwordConfirm) {
+
             // Creates user object with mongoose model.
             // Note that the password is not present.
             var newUser = new User({
-                username: req.body.username,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                gender: req.body.gender,
-                address: req.body.address,
-                zipcode: req.body.zipcode,
-                txtEmpPhone: req.body.txtEmpPhone,
+                username :  req.body.username,
+                firstName:  req.body.firstName,
+                lastName :  req.body.lastName,
+                email    :  req.body.email,
+                gender   :  req.body.gender,
+                address  :  req.body.address,
+                zipcode  :  req.body.zipcode,
+                txtEmpPhone  :  req.body.txtEmpPhone,
             });
+        
+            // Uses passport to register the user.
+            // Pass in user object without password
+            // and password as next parameter.
+            User.register(new User(newUser), req.body.password, 
+                    function(err, account) {
+                        // Show registration form with errors if fail.
+                        let reqInfo = RequestService.reqHelper(req);
+                        if (err) {
+                            return res.json({ user : newUser, errorMessage: err, 
+                                            reqInfo:reqInfo });
+                        }
+                        return res.json({Message:"Register successfully", user:newUser, reqInfo:reqInfo}) ;
+                    });
 
-            User.register(new User(newUser), req.body.password,
-                function (err, account) {
-                    // Show registration form with errors if fail.
-                    let reqInfo = RequestService.reqHelper(req);
-                    if (err) {
-                        return res.json({
-                            user: newUser, errorMessage: err,
-                            reqInfo: reqInfo
-                        });
-                    }
-                    return res.json({ Message: "Registered successfully", user: newUser, reqInfo: reqInfo });
-                });
         }
         else {
-            res.json({
-                user: newUser,
-                errorMessage: "Passwords do not match.",
-            });
+        res.render('User/Register', { user:newUser, 
+                errorMessage: "Passwords do not match.", 
+                reqInfo:reqInfo })
         }
     }
     else {
