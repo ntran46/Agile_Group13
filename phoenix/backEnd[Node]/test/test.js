@@ -179,139 +179,139 @@ restObject4 = {
 }
 
 
-describe("Normal Users - Register", () => {
-    before((done) => {
-        chai.request(app)
-            .post(`/User/RegisterUser`)
-            .send(userObject)
-            .end((err, res) => {
-                expect(res.status).to.equal(200);
-                expect(res.body.Message).to.equal('Registered successfully');
-                done();
-            });
-    });
+// describe("Normal Users - Register", () => {
+//     before((done) => {
+//         chai.request(app)
+//             .post(`/User/RegisterUser`)
+//             .send(userObject)
+//             .end((err, res) => {
+//                 expect(res.status).to.equal(200);
+//                 expect(res.body.Message).to.equal('Registered successfully');
+//                 done();
+//             });
+//     });
 
-    describe("[POST] user - Register", () => {
+//     describe("[POST] user - Register", () => {
 
-        it("1) Test a POST request to create a new user.", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject1)
-                .end((err, res) => {
-                    expect(res.status).to.equal(200)
-                    expect(res.body).to.be.a('object')
-                    expect(res.body).not.to.be.empty;
-                    expect(res.body.user).to.have.property('username', 'bcit.ca')
-                    expect(res.body.user).to.have.property('email', 'bcit@bcit.ca')
-                    done();
-                });
-        });
+//         it("1) Test a POST request to create a new user.", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject1)
+//                 .end((err, res) => {
+//                     expect(res.status).to.equal(200)
+//                     expect(res.body).to.be.a('object')
+//                     expect(res.body).not.to.be.empty;
+//                     expect(res.body.user).to.have.property('username', 'bcit.ca')
+//                     expect(res.body.user).to.have.property('email', 'bcit@bcit.ca')
+//                     done();
+//                 });
+//         });
 
-        it("2) Should not create a user with an in-use username.", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject2)
-                .end((err, res) => {
-                    expect(res.body.errorMessage.name).to.equal('UserExistsError')
-                    done();
-                });
-        });
+//         it("2) Should not create a user with an in-use username.", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject2)
+//                 .end((err, res) => {
+//                     expect(res.body.errorMessage.name).to.equal('UserExistsError')
+//                     done();
+//                 });
+//         });
 
-        it("3) Should not create a new user with an in-use email address.", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject3)
-                .end((err, res) => {
-                    expect(res.status).to.equal(200)
-                    expect(res.body.errorMessage.name).to.equal('MongoError')
-                    done();
-                });
-        });
+//         it("3) Should not create a new user with an in-use email address.", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject3)
+//                 .end((err, res) => {
+//                     expect(res.status).to.equal(200)
+//                     expect(res.body.errorMessage.name).to.equal('MongoError')
+//                     done();
+//                 });
+//         });
 
-        it("4) Should not create a new user with an invalid password (not at least 8 character && no upper case).", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject4)
-                .end((err, res) => {
-                    expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
-                    done();
-                });
-        });
+//         it("4) Should not create a new user with an invalid password (not at least 8 character && no upper case).", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject4)
+//                 .end((err, res) => {
+//                     expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
+//                     done();
+//                 });
+//         });
 
-        it("5) Should not create a new user with an invalid password (no number && no symbol).", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject5)
-                .end((err, res) => {
-                    expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
-                    done();
-                });
-        });
+//         it("5) Should not create a new user with an invalid password (no number && no symbol).", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject5)
+//                 .end((err, res) => {
+//                     expect(res.body.errorMessage).to.equal("Must contain at least 1 number, 1 uppercase, 1 lowercase letter, 1 special character, and at least 8 or more characters.")
+//                     done();
+//                 });
+//         });
 
-        it("6) Should not create a new user when password doesn't match the confirm password.", (done) => {
-            chai.request(app)
-                .post(`/User/RegisterUser`)
-                .send(userObject6)
-                .end((err, res) => {
-                    expect(res.body.errorMessage).to.equal("Passwords do not match.")
-                    done();
-                    console.log()
-                    console.log("-------------------------------------------------")
-                    console.log("-------------------------------------------------")
+//         it("6) Should not create a new user when password doesn't match the confirm password.", (done) => {
+//             chai.request(app)
+//                 .post(`/User/RegisterUser`)
+//                 .send(userObject6)
+//                 .end((err, res) => {
+//                     expect(res.body.errorMessage).to.equal("Passwords do not match.")
+//                     done();
+//                     console.log()
+//                     console.log("-------------------------------------------------")
+//                     console.log("-------------------------------------------------")
 
-                });
-        });
+//                 });
+//         });
 
 
-    });
-});
+//     });
+// });
 
-describe('Users - Login', () => {
-    before((done) => {
-        chai.request(app)
-            .post(`/User/RegisterUser`)
-            .send(userObject1)
-            .end((err, res) => {
-                expect(res.status).to.equal(200)
-                done();
-            });
-    });
+// describe('Users - Login', () => {
+//     before((done) => {
+//         chai.request(app)
+//             .post(`/User/RegisterUser`)
+//             .send(userObject1)
+//             .end((err, res) => {
+//                 expect(res.status).to.equal(200)
+//                 done();
+//             });
+//     });
 
-    describe("[POST, GET] Normal User - Login", () => {
+//     describe("[POST, GET] Normal User - Login", () => {
 
-        it("1) Test a POST request to login with an existing user.", (done) => {
-            objectTemp ={"username":"bcit.ca", "password": "P@ssw0rd"}
-            chai.request(app)
-                .post(`/auth`)
-                .send(objectTemp)
-                .end((err, res) => {
-                    expect(res.status).to.equal(200)
-                    if (res.body.token){
-                        console.log("User logged in")
-                    }
-                    else{
-                        console.log("Dennied access")
-                    }
-                    done();
-            });
-        });
+//         it("1) Test a POST request to login with an existing user.", (done) => {
+//             objectTemp ={"username":"bcit.ca", "password": "P@ssw0rd"}
+//             chai.request(app)
+//                 .post(`/auth`)
+//                 .send(objectTemp)
+//                 .end((err, res) => {
+//                     expect(res.status).to.equal(200)
+//                     if (res.body.token){
+//                         console.log("User logged in")
+//                     }
+//                     else{
+//                         console.log("Dennied access")
+//                     }
+//                     done();
+//             });
+//         });
 
-        it("2) Test a POST request to login with an non-existing user.", (done) => {
-            objectTemp ={"username":"bcit.ca.com", "password": "P@ssw0rd"}
-            chai.request(app)
-                .post(`/auth`)
-                .send(objectTemp)
-                .end((err, res) => {
-                    expect(res.status).to.equal(401)
-                    console.log(res.text)
-                    done();
-                    console.log()
-                    console.log("-------------------------------------------------")
-                    console.log("-------------------------------------------------")
-                });
-        });
-    });
-});
+//         it("2) Test a POST request to login with an non-existing user.", (done) => {
+//             objectTemp ={"username":"bcit.ca.com", "password": "P@ssw0rd"}
+//             chai.request(app)
+//                 .post(`/auth`)
+//                 .send(objectTemp)
+//                 .end((err, res) => {
+//                     expect(res.status).to.equal(401)
+//                     console.log(res.text)
+//                     done();
+//                     console.log()
+//                     console.log("-------------------------------------------------")
+//                     console.log("-------------------------------------------------")
+//                 });
+//         });
+//     });
+// });
 
 describe("Restaurant - Register", () => {
     before((done) => {
@@ -366,7 +366,7 @@ describe("Restaurant - Register", () => {
                 .send(restObject3)
                 .end((err, res) => {
                     expect(res.body.errorMessage).to.not.be.null;
-                    expect(res.body.Message).to.equal('An error occured. Item not created.')
+                    expect(res.body.errorMessage).to.equal('A similar licence exists.')
                     done();
                 });
         });
