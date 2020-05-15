@@ -111,38 +111,39 @@ exports.ReviewDetail = async function(request, response) {
 }
 
 // Handles 'POST' with registration form submission.
-exports.RegisterRestaurant  = async function(req, res){
-    let licence = await _RestaurantRepo.getRestaurantByLicence(req.body.licence);
-    if (licence == null) {
+exports.RegisterRestaurant = async function (req, res) {
+    let license = await _RestaurantRepo.getRestaurantByLicence(req.body.license);
+    if (license == null) {
 
         // Creates Restaurant object with mongoose model.
         var newRestaurant = new Restaurant({
-            email    :  req.body.email,
-            restaurantName:  req.body.restaurantName,
-            strAddress     :  req.body.strAddress,
-            city     :  req.body.city,
-            zipcode  :  req.body.zipcode,
-            phoneNo  :  req.body.phoneNo,
-            description  :  req.body.description,
-            license  :  req.body.license,
-            menu     :  req.body.menu,
-            branchLocation :  req.body.branchLocation,
-            employees:  req.body.employees,
+            email: req.body.email,
+            restaurantName: req.body.restaurantName,
+            strAddress: req.body.strAddress,
+            city: req.body.city,
+            zipcode: req.body.zipcode,
+            phoneNo: req.body.phoneNo,
+            description: req.body.description,
+            license: req.body.license,
+            menu: req.body.menu,
+            branchLocation: req.body.branchLocation,
+            employees: req.body.employees,
         });
-    
+
         /// Call Repo to save 'Restaurant' object.
         let responseObject = await _RestaurantRepo.create(newRestaurant);
 
         // No errors so save is successful.
-        if(responseObject.errorMessage == "") {
-            console.log('Saved without errors.');
-            console.log(JSON.stringify(responseObject.obj));
-            res.json({ restaurant:responseObject.obj,
-                                                errorMessage:""});
+        if (responseObject.errorMessage == "") {
+            res.json({
+                restaurant: responseObject.obj,
+                Message: "Saved without errors.",
+                errorMessage: ""
+            });
         }
+
         // There are errors. Show form the again with an error message.
         else {
-            console.log("An error occured. Item not created.");
             res.json({
                 restaurant: responseObject.obj,
                 errorMessage: responseObject.errorMessage,
