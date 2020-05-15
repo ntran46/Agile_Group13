@@ -2,6 +2,5 @@ language: node_js
 node_js: 
         - "stable"
 script: cd phoenix/backEnd[Node]; npm install; cd test; npm install; npm test;
-install: travis_wait 30 nvm install;
 services: 
         - mongodb
