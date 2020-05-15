@@ -1,7 +1,6 @@
 language: node_js
 node_js: 
         - "stable"
-install: cd phoenix/backEnd[Node]; npm install; npm install mongoose;
-script: cd phoenix/backEnd[Node]/test; npm test;
+script: cd phoenix/backEnd[Node]; npm install; cd test; npm install; npm test;
 services: 
         - mongodb
