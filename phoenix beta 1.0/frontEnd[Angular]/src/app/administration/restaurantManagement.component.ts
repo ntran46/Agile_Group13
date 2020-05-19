@@ -7,7 +7,7 @@ import {Location } from "@angular/common";
 @Component({
     selector: 'app-login',
     templateUrl:`./restaurantManagement.component.html`,
-    styleUrls: ['../app.component.css']
+    styleUrls: ['./restaurantManagement.component.css']
 })
 
 export class RestaurantManagementComponent {

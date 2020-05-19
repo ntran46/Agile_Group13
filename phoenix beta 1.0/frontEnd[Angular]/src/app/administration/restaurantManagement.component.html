@@ -1,40 +1,52 @@
-<br/><br/>    
+<div class="container">
+    <hr>
+    <h3>Restaurant List:</h3>
+    <hr>
+</div>
+<div class="container restContainer" *ngFor="let res of _RestaurantItem">
+    <div class="row">
+        <div class="card col-xs-12 col-md-12">
+            <div class="card-body">
+                <div class="row">
+                    <!-- left side of card / image -->
+                    <div class="col-xs-0 col-md-2 restImgContainer">
+                        <img class="img-fluid restImg" alt="Responsive image" src="../assets/restaurants/mcdonalds.jpg">
+                    </div>
 
-<div *ngFor="let res of _RestaurantItem">
-    <div class="container2">
-
-        <table id="or_tb">
-            <tr>
-                <td style="width: 4.5cm;"><b>Restaurant Name</b></td>
-                <td style="width: 4cm;"></td>
-                <td style="width: 4cm;"><b>Location</b></td>
-                <td style="width: 4cm;"></td>
-                <td style="width: 3cm;"><b>Phone Number</b></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td >{{res.restaurantName}}</td>
-                <td></td>
-                <td>{{res.strAddress}}, {{res.city}}, {{res.zipcode}}</td>
-                <td></td>
-                <td>{{res.phoneNo}}</td>
-                <td></td>
-            </tr>
-            <tr style="height:0.5cm"></tr>
-            <tr>
-                <td></td>
-                <td colspan="3"><b>Description:</b> </td>
-                <td rowspan="2">
-                    <button style="width: 3cm;" type="submit">Menu</button> 
-                </td>
-                <td rowspan="2">
-                    <button style="width: 3cm;" (click)="deleteRestaurant(res.email)" type="submit">Delete</button> 
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="3" >{{res.description}}</td>
-            </tr>
-        </table>
+                    <!-- right side of card -->
+                    <div class="col-xs-12 col-md-10">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="card-text">Restaurant Name: {{res.restaurantName}}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-text">Phone Number: {{res.phoneNo}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="card-text">Location: {{res.strAddress}}, {{res.city}}, {{res.zipcode}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="card-text">Description: {{res.description}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Menu</button> 
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" (click)="deleteRestaurant(res.email)" type="submit">Delete</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
     </div>
 </div>

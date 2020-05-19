@@ -1,10 +1,14 @@
 @font-face {
-    font-family: 'Ubuntu', sans-serif;
-    src: url(https://fonts.googleapis.com/css2?family=Ubuntu&display=swap);
+    font-family: 'Roboto', sans-serif;
+    src: url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);
 }
 
+#routerID{
+    font-family: 'Roboto', sans-serif !important;
+}
 *{
-    font-family: 'Ubuntu', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+
 }
 .navbar-brand{
     max-width: 100px;
