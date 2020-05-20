@@ -9,8 +9,18 @@ class RestaurantRepo {
         return restaurants;
     }
 
-    async getRestaurantByEmail(email) {
-        var restaurant = await Restaurant.findOne({email: email});
+    async getEmployees() {
+        var employees = await Restaurant.find().exec();
+        if(employees) {
+            return employees;
+        }
+        else {
+            return [];
+        }
+    }    
+
+    async getRestaurantByID(id) {
+        var restaurant = await Restaurant.findOne({_id: id});
         if(restaurant) {
             let respose = { obj: restaurant, errorMessage:"" }
             return respose;
@@ -20,8 +30,8 @@ class RestaurantRepo {
         }
     }
 
-    async getRestaurantByID(id) {
-        var restaurant = await Restaurant.findOne({_id: id});
+    async getRestaurantByEmail(email) {
+        var restaurant = await Restaurant.findOne({email: email});
         if(restaurant) {
             let respose = { obj: restaurant, errorMessage:"" }
             return respose;
@@ -100,7 +110,7 @@ class RestaurantRepo {
                 return response; 
             }
             else {
-                response.errorMessage = "An item with this id cannot be found." };
+                response.errorMessage = "No item with this id cannot be found." };
                 return response; 
             }
 
@@ -200,25 +210,6 @@ class RestaurantRepo {
         console.log(deletedItem);
         return deletedItem;
     }
-
-    async getUserByUsername(username) {
-        var user = await Restaurant.findOne({username: username}, {_id:0, roles:1});
-        if(user) {
-            return user;
-        }
-        else {
-            return [];
-        }
-    } 
-    async getEmployees() {
-        var employees = await Restaurant.find().exec();
-        if(employees) {
-            return employees;
-        }
-        else {
-            return [];
-        }
-    }    
 }
 module.exports = RestaurantRepo;
 

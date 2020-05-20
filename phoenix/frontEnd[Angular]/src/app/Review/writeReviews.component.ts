@@ -35,13 +35,13 @@ export class WriteReviewComponent {
         this._http = http;
         this.route = route
         this.getSecureData()
-        this.getReviews(this.route.snapshot.params['id']);
+        this.getReviews(this.route.snapshot.params['license']);
         this.showContentIfLoggedIn();
     }
 
-    getReviews(RestaurantID){
+    getReviews(license){
         
-        let url = this.site + 'ReviewDetail?_id=' + RestaurantID
+        let url = this.site + 'ReviewDetail?license=' + license
         this.http.get<any>(url)
             .subscribe(result => {
                 this._RestaurantItem = result.restaurant.obj
@@ -54,15 +54,15 @@ export class WriteReviewComponent {
             })
     }
 
-    Submit(RestaurantID){
-        console.log(RestaurantID)
+    Submit(license){
+        console.log(license)
 
-        let url = this.site + 'WriteReviews?_id=' + RestaurantID
+        let url = this.site + 'WriteReviews?license=' + license
         this.http.post(url, {
-                _id    : RestaurantID,
-                rating : this._rating,
-                review : this._review,  
-                username: this._user.username
+                license     : license,
+                rating      : this._rating,
+                review      : this._review,  
+                username    : this._user.username
             })
         .subscribe(result => {
             console.log(JSON.stringify(result))
@@ -81,7 +81,7 @@ export class WriteReviewComponent {
     }
 
     Cancel(){
-        window.location.href = '../Menu';
+        window.location.href = '../Main';
     }
 
     showContentIfLoggedIn() {
@@ -94,6 +94,7 @@ export class WriteReviewComponent {
             this.token   = ''
         }
     }
+    
     getSecureData() {  
         this._apiService.getData('User/SecureAreaJwt', 
                                 this.secureDataCallback);

@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { ApiService } from '../ApiService';
-import {Router} from "@angular/router";
-import {Location } from "@angular/common";
+import { Component, Input }         from '@angular/core'
+import { HttpClient, HttpHeaders }  from '@angular/common/http'
+import { ApiService }               from '../ApiService';
+import {Router}                     from "@angular/router";
+import {Location }                  from "@angular/common";
 
 @Component({
     selector: 'app-login',
@@ -11,18 +11,18 @@ import {Location } from "@angular/common";
 })
 
 export class RestaurantManagementComponent {
-    public site  = 'http://localhost:1337/';
-    password     = ' ';         
-    username     = '';
-    token        = '';
-    roles        : Array<any> = [];
-    _http        : HttpClient;
-    _id          : Number = 1;
-    _description : String="";
-    _errorMessage: String = " ";
-    _RestaurantItem   : Array<any>;
-    reqInfo      : any = {};
-    _apiService  : ApiService;
+    public site     = 'http://localhost:1337/';
+    password        = ' ';         
+    username        = '';
+    token           = '';
+    roles           : Array<any> = [];
+    _http           : HttpClient;
+    _id             : Number = 1;
+    _description    : String="";
+    _errorMessage   : String = " ";
+    _RestaurantItem : Array<any>;
+    reqInfo         : any = {};
+    _apiService     : ApiService;
 
   
     constructor(private http: HttpClient) {

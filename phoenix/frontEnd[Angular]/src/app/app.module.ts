@@ -35,9 +35,9 @@ const  appRoutes:  Routes  = [
   {path: 'UserManagement', component: userManagementComponent},
   {path: 'RestaurantManagement', component: RestaurantManagementComponent},
   {path: 'WriteReviews', redirectTo: 'WriteReviews/',pathMatch: 'full',},
-  {path: 'WriteReviews', children: [{path: ':id', component: WriteReviewComponent,},]},
+  {path: 'WriteReviews', children: [{path: ':license', component: WriteReviewComponent,},]},
   {path: 'ViewReview', redirectTo: 'ViewReview/',pathMatch: 'full',},
-  {path: 'ViewReview', children: [{path: ':id', component: ReviewComponent,},]},
+  {path: 'ViewReview', children: [{path: ':license', component: ReviewComponent,},]},
   {path: 'WaitingList', component:WaitingListComponent},
 
   {path:  '', redirectTo:  '/Main', pathMatch:  'full'},

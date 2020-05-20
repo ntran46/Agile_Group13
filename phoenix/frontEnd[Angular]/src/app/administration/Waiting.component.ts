@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { ApiService } from '../ApiService';
+import { Component, Input }         from '@angular/core'
+import { HttpClient, HttpHeaders }  from '@angular/common/http'
+import { ApiService }               from '../ApiService';
 
 @Component({
     selector: 'app-login',
@@ -9,22 +9,22 @@ import { ApiService } from '../ApiService';
 })
 
 export class WaitingListComponent {
-    public site  = 'http://localhost:1337/';
-    password     = ' ';         
-    username     = '';
-    token        = '';
-    roles        : Array<any> = [];
-    _http        : HttpClient;
-    _id          : Number = 1;
-    checkList    : any =[];
-    _licenseChecked   : String="";
-    _locationChecked   : String="";
-    _nameChecked   : String="";
-    _phoneChecked : String="";
-    _errorMessage: String = " ";
-    _RestaurantItem   : any =[];
-    reqInfo      : any = {};
-    _apiService  : ApiService;
+    public site         = 'http://localhost:1337/';
+    password            = ' ';         
+    username            = '';
+    token               =  '';
+    roles               : Array<any> = [];
+    _http               : HttpClient;
+    _id                 : Number = 1;
+    checkList           : any =[];
+    _licenseChecked     : String="";
+    _locationChecked    : String="";
+    _nameChecked        : String="";
+    _phoneChecked       : String="";
+    _errorMessage       : String = " ";
+    _RestaurantItem     : any =[];
+    reqInfo             : any = {};
+    _apiService         : ApiService;
 
     constructor(private http: HttpClient) {
         this._apiService = new ApiService(http, this);
@@ -70,10 +70,10 @@ export class WaitingListComponent {
 
         if(_validationCheck.length == 0){
 
-            let url = this.site + "Restaurant/Update"
+            let url = this.site + "Restaurant/approveRestaurant"
             this.http.post(url, 
-                    { email: email,
-                      _id  : ID,
+                    { email     : email,
+                      _id       : ID,
                       isApproved: _isApproved
                     }) 
                     .subscribe(
@@ -81,6 +81,7 @@ export class WaitingListComponent {
                             this._errorMessage = data["errorMessage"];
                             console.log(JSON.stringify(data));
                             this.getAllRestaurants(); 
+                            window.location.href = '../Main';
                         },
                         error  => {
                         console.log(JSON.stringify(error));

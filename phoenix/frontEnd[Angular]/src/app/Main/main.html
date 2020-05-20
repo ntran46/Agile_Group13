@@ -32,9 +32,9 @@
             </tr>
             <tr>
                 <td></td>
-                <td><a href="ViewReview/{{res[0]._id}}">Rating</a>: {{res[1] || 0}}</td>
-                <td> <a href="ViewReview/{{res[0]._id}}">Reviews</a>: {{res[2] || 0}}</td>
-                <td> <a href="WriteReviews/{{res[0]._id}}"> Write a review </a></td>
+                <td><a href="ViewReview/{{res[0].license}}">Rating</a>: {{res[1] || 0}}</td>
+                <td> <a href="ViewReview/{{res[0].license}}">Reviews</a>: {{res[2] || 0}}</td>
+                <td> <a href="WriteReviews/{{res[0].license}}"> Write a review </a></td>
             </tr>
         </table>
     </div>

@@ -1,7 +1,7 @@
-var UserController   = require('./Controllers/UserController');
-var RestaurantController = require('./Controllers/RestaurantController')
-const authMiddleware = require('./authHelper')
-const cors           = require('cors');
+var UserController          = require('./Controllers/UserController');
+var RestaurantController    = require('./Controllers/RestaurantController')
+const authMiddleware        = require('./authHelper')
+const cors                  = require('cors');
 
 
 // Routes
@@ -19,24 +19,15 @@ module.exports = function(app){
     app.post('/User/EditMyAccount', cors(), UserController.EditMyAccount);
     app.get('/User/MyAccount', cors(), UserController.MyAccount);
 
+    // Restaurant routes
     app.get('/Restaurant/Index', cors(), RestaurantController.Index);
-    app.get('/Restaurant/ReviewDetail', cors(), RestaurantController.ReviewDetail);
-    app.post('/Restaurant/WriteReviews', RestaurantController.WriteReviews);
-    app.post('/Restaurant/Update', RestaurantController.Update);
     app.get('/Restaurant/Register', RestaurantController.Register);
     app.post('/Restaurant/RegisterRestaurant', RestaurantController.RegisterRestaurant);
+    app.post('/Restaurant/approveRestaurant', RestaurantController.approveRestaurant);
+    app.post('/Restaurant/WriteReviews', RestaurantController.WriteReviews);
+    app.get('/Restaurant/ReviewDetail', cors(), RestaurantController.ReviewDetail);
     app.delete('/Restaurant/Delete', cors(), RestaurantController.Delete);
 
-    // app.get('/Orders/Index', cors(), OrderHistoryController.Index);
-    // app.post('/Orders/AddOrder', cors(), OrderHistoryController.AddOrder);
-
-    // app.get('/Movie/ReviewDetail', MovieController.ReviewDetail);
-    // app.get('/Movie/WriteReviews', MovieController.WriteReviews);
-    // app.get('/Movie/MyReviews', MovieController.MyReviews);
-    // app.post('/Movie/UpdateMyReview', MovieController.UpdateMyReview);
-    // app.get('/Movie/EditMyReview', MovieController.EditMyReview);
-    // app.post('/Movie/CreateReview', MovieController.CreateReview);
-    // app.post('/Movie/DeleteReview', MovieController.DeleteReview);
 
     // Sign in for user
     app.post(

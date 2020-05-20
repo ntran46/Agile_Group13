@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ErrorComponent } from '../error.component';
-import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit }        from '@angular/core';
+import { MatDialog, MatDialogRef }  from '@angular/material/dialog';
+import { ErrorComponent }           from '../error.component';
+import { Router }                   from '@angular/router';
+import { HttpClient, HttpHeaders }  from '@angular/common/http';
 
 const BASE_URL = "http://localhost:1337/User/";
 
@@ -13,13 +13,13 @@ const BASE_URL = "http://localhost:1337/User/";
 })
 
 export class LoginComponent {
-  hide = true;
-  _http:HttpClient;
-  _username: String;
-  _password: String ='P@ssw0rd';
-  _token    = '';
-  _errorMessage:String = "";
-  message  = 'Not logged in.';
+  hide          = true;
+  _http         :HttpClient;
+  _username     : String;
+  _password     : String ='P@ssw0rd';
+  _token        = '';
+  _errorMessage :String = "";
+  message       = 'Not logged in.';
 
   constructor(private dialog: MatDialog,private router: Router, private http: HttpClient) { 
     this._http = http;

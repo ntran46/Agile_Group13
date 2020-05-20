@@ -13,19 +13,19 @@ const BASE_URL = "http://localhost:1337/User/";
 })
 
 export class userManagementComponent implements OnInit, AfterViewInit { 
-  _UserArray: Array<any>;
-  _role: String;
-  _username: String;
-  _firstname: String;
-  _lastname: String;
-  _email: String;
-  _gender: any;
-  _address: string;
-  _zipcode: any;
-  _txtEmpPhone: any;
-  reqInfo: any;
-  _http:HttpClient;
-  _errorMessage:String = "";
+  _UserArray    : Array<any>;
+  _role         : String;
+  _username     : String;
+  _firstname    : String;
+  _lastname     : String;
+  _email        : String;
+  _gender       : any;
+  _address      : string;
+  _zipcode      : any;
+  _txtEmpPhone  : any;
+  _reqInfo      : any;
+  _http         :HttpClient;
+  _errorMessage :String = "";
   _apiService  : ApiService;
   
   public ELEMENT_DATA: PeriodicElement[] = [];

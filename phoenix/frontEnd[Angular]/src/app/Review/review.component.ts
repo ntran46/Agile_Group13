@@ -28,12 +28,12 @@ export class ReviewComponent {
         this._http = http;
         this.route = route
         this.getSecureData();
-        this.getReviews(this.route.snapshot.params['id']);
+        this.getReviews(this.route.snapshot.params['license']);
     }
 
-    getReviews(RestaurantID){
-        console.log(RestaurantID)
-        let url = this.site + 'ReviewDetail?_id=' + RestaurantID
+    getReviews(license){
+        console.log(license)
+        let url = this.site + 'ReviewDetail?license=' + license
         this.http.get<any>(url)
             .subscribe(result => {
                 this._RestaurantItem = result.restaurant.obj
@@ -46,12 +46,12 @@ export class ReviewComponent {
             })
     }
 
-    WriteReview(RestaurantID){
-        window.location.href = '../WriteReviews/' + RestaurantID;
+    WriteReview(license){
+        window.location.href = '../WriteReviews/' + license;
     }
 
     Menu(RestaurantID){
-        window.location.href = '../Menu';
+        window.location.href = '../Main';
     }
 
     getSecureData() {  
