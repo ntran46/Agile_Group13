@@ -1,3 +1,9 @@
+.View {
+  display: inline;
+}
+.Edit {
+  visibility: hidden;
+}
 
 .account-container{
   background-color: #243447;

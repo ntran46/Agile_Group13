@@ -42,7 +42,6 @@ export class AppComponent {
         if(sessionStorage.getItem('auth_token')!=null) {
             this.token   = sessionStorage.getItem('auth_token');
             this.getSecureData()
-            console.log(this.reqInfo)
         }
         else {
             this.token   = ''
@@ -52,7 +51,6 @@ export class AppComponent {
     getSecureData() {  
         this._apiService.getData('User/SecureAreaJwt', 
                                 this.secureDataCallback);
-                                console.log(this._apiService)
     }
     // Callback needs a pointer '_this' to current instance.
     secureDataCallback(result, _this) {
@@ -60,7 +58,6 @@ export class AppComponent {
             _this.secureData = result.secureData;
             _this.reqInfo = result.reqInfo;
             console.log(_this.reqInfo)
-            
         }
         else {
             console.log(JSON.stringify(result.errorMessage));
@@ -87,25 +84,6 @@ export class AppComponent {
         }
     }
       
-    postSecureMessage() {
-        let dataObject = {
-            msgFromClient: 'hi from client'
-        }
-        this._apiService.postData('User/PostAreaJwt', dataObject, 
-                                this.securePostCallback);                              
-    }
-    // Callback needs a pointer '_this' to current instance.
-    securePostCallback(result, _this) {
-        if(result.errorMessage == '') {
-            _this.msgFromServer = result['msgFromServer']; 
-        }
-        else {
-            console.log(JSON.stringify(result.errorMessage));
-            alert("Unauthorized Area");
-            window.location.href = './#';
-        }   
-    }
-
     //------------------------------------------------------------
     // Log user out. Destroy token.
     //------------------------------------------------------------

@@ -1,0 +1,74 @@
+    
+<div *ngIf="reqInfo.authenticated && reqInfo.roles.includes('Manager')">
+
+<a class="btn btn-primary" href="/RestaurantManagement">Go back</a>        
+
+
+<div class="container-fluid waitingList">
+
+<div class="row">
+    <div class="col-lg-6"  *ngFor="let res of _RestaurantItem; let i = index">
+        <div class="card">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <img class="card-img-top" id="card-img" src="../../assets/dance.gif" alt="Card image cap">
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="card-body">
+            <table class="table table-sm table-striped table-dark table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Info</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Checkbox</th>
+                    </tr>
+                </thead>
+                <tbody id='{{res._id}}'>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Restaurant Name:</td>
+                    <td>{{res.restaurantName}}</td>
+                    <td><input type="checkbox" id='{{res.restaurantName}}' name="nameCheked" ></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Phone Number:</td>
+                    <td>{{res.phoneNo}}</td>
+                    <td><input type="checkbox" id='{{res.phoneNo}}' name="nameCheked" ng-model=res._id></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Location:</td>
+                    <td>{{res.strAddress}}, {{res.city}}, {{res.zipcode}}</td>
+                    <td><input type="checkbox" id='{{res.strAddress}}' name="nameCheked" ng-model=res._id></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Food Licence:</td>
+                        <td>{{res.license}}</td>
+                        <td><input type="checkbox" id='{{res.license}}' name="nameCheked" ng-model=res._id></td>
+                        </tr>
+                </tbody>
+            </table>
+            <div class="row btnContainer">
+                <div class="col-md-6 btnCol1">
+                    <button class="btn btn-primary" (click)="updateWaitingItem(res.email, 'Approved', res._id)" type="submit">Approve</button>
+                </div>
+                <div class="col-md-6 btnCol2">
+                    <button class="btn btn-primary"  (click)="updateWaitingItem(res.email, 'Declined', res._id)" type="submit">Decline</button> 
+                </div>
+            </div>
+            </div>
+          </div>
+
+         
+    </div>
+</div>
+
+
+</div>
+</div>
+

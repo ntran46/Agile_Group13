@@ -1,8 +1,9 @@
-<mat-form-field>
-    <mat-label>Filter</mat-label>
+<mat-form-field style="background-color:coral; padding: 10px;">
+    <mat-label style="color: blue;">Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
   </mat-form-field>
-  
+  <br>
+  <br>
   <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
 
     <ng-container matColumnDef="username">

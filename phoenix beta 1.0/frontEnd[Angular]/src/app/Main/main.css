@@ -87,9 +87,8 @@
 }
 .feedback-container a, .partner-container a{
     bottom: 0;
-    background-color: #FC4445;
+    background-color: #900000;;
     border: none;
-    margin-left: 35%;
 }
 
 .feedback-container text-card ,.partner-container text-card{
@@ -98,7 +97,8 @@
 }
 
 .restContainer{
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 0;
 }
 
@@ -108,6 +108,11 @@
     z-index: 2;
 }
 
+.restImgContainer{
+    background: url(../../assets/restaurants/mcdonalds.jpg);
+    background-position: center;
+    background-size: cover;
+}
 .card-img{
     width: 100%;
     height: 100%;
@@ -159,8 +164,69 @@
 }
 
 .readyToOrder a{
-    width: 100%;
-    background-color: #FC4445;
+    width: 90%;
+    background-color: #900000;
     text-align: center;
     border: none;
 }
+
+.btn, .readyToOrder a, .cardContainer a{
+    width: 90%;
+    background: #900000;
+    border: none;
+    margin-left: 5%;
+}
+
+.btn:hover, .readyToOrder a:hover, .cardContainer a:hover{
+    width: 100%;
+    background: crimson;
+    box-shadow:0px 0px 10px crimson;
+    margin-left:0;
+}
+
+.btnContainer{
+    margin-top: 10px;
+    padding: 20px
+}
+
+@media (max-width: 869px){
+    b,p,a,.btn{
+        font-size: 12px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    h5{
+        font-size: 14px;
+    }
+    .btn{
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin: 5px 0;
+    }
+    .card-img{
+        width: 50%;
+        /* height: 50%; */
+    }
+    .carousel, .carousel-item{
+        max-height: 500px;
+    }
+}
+/* 
+@media(min-width:769px){
+
+    .btnCol1{
+        position: absolute;
+        bottom: 0px;
+        margin-bottom: 10px;
+    }
+    .btnCol2{
+        position: absolute;
+        bottom: 0px;
+        margin-bottom: 10px;
+    }
+} */

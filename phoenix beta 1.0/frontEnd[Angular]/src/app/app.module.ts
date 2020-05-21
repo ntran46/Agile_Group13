@@ -17,6 +17,9 @@ import { MyAccountComponent } from './User/MyAccount.component';
 import { userManagementComponent } from './administration/userManagement.component';
 import { RestaurantRegisterComponent } from './register/RestaurantRegister.component';
 import { RestaurantManagementComponent } from './administration/restaurantManagement.component';
+import { WaitingListComponent } from './administration/Waiting.component';
+import { ReviewComponent} from './Review/review.component'
+import { WriteReviewComponent} from './Review/writeReviews.component'
 
 
 import { ReactiveFormsModule} from '@angular/forms';
@@ -31,14 +34,21 @@ const  appRoutes:  Routes  = [
   {path: 'RestaurantRegister', component: RestaurantRegisterComponent},
   {path: 'UserManagement', component: userManagementComponent},
   {path: 'RestaurantManagement', component: RestaurantManagementComponent},
+  {path: 'WriteReviews', redirectTo: 'WriteReviews/',pathMatch: 'full',},
+  {path: 'WriteReviews', children: [{path: ':license', component: WriteReviewComponent,},]},
+  {path: 'ViewReview', redirectTo: 'ViewReview/',pathMatch: 'full',},
+  {path: 'ViewReview', children: [{path: ':license', component: ReviewComponent,},]},
+  {path: 'WaitingList', component:WaitingListComponent},
+
   {path:  '', redirectTo:  '/Main', pathMatch:  'full'},
   // {path: '**', component: MainComponent}
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,MainComponent,MyAccountComponent,RestaurantManagementComponent,
-    LoginComponent, ErrorComponent, UserRegisterComponent, userManagementComponent,RestaurantRegisterComponent
+    AppComponent,MainComponent,MyAccountComponent,RestaurantManagementComponent,ReviewComponent,WriteReviewComponent,
+    LoginComponent, ErrorComponent, UserRegisterComponent, userManagementComponent,RestaurantRegisterComponent,
+    WaitingListComponent,
   ],
   imports: [
     BrowserModule,

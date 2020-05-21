@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort'
 import {MatPaginator} from '@angular/material/paginator'
+import { ApiService } from '../ApiService';
 
 const BASE_URL = "http://localhost:1337/User/";
 
@@ -12,19 +13,20 @@ const BASE_URL = "http://localhost:1337/User/";
 })
 
 export class userManagementComponent implements OnInit, AfterViewInit { 
-  _UserArray: Array<any>;
-  _role: String;
-  _username: String;
-  _firstname: String;
-  _lastname: String;
-  _email: String;
-  _gender: any;
-  _address: string;
-  _zipcode: any;
-  _txtEmpPhone: any;
-  _reqInfo: any;
-  _http:HttpClient;
-  _errorMessage:String = "";
+  _UserArray    : Array<any>;
+  _role         : String;
+  _username     : String;
+  _firstname    : String;
+  _lastname     : String;
+  _email        : String;
+  _gender       : any;
+  _address      : string;
+  _zipcode      : any;
+  _txtEmpPhone  : any;
+  _reqInfo      : any;
+  _http         : HttpClient;
+  _apiService   : ApiService;
+  _errorMessage : String = "";
   
   public ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['username', 'firstName', 'lastName', 'email', 'txtEmpPhone', 'update', 'delete'];
@@ -34,7 +36,9 @@ export class userManagementComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private http: HttpClient) {
-      this._http = http;
+    this._apiService = new ApiService(http, this);
+    this.getSecureData()
+    this._http = http;
     }
 
     ngOnInit() {
@@ -96,6 +100,23 @@ export class userManagementComponent implements OnInit, AfterViewInit {
       
     }
     
+    getSecureData() {  
+      this._apiService.getData('User/SecureAreaJwt', 
+                              this.secureDataCallback);
+    }
+    // Callback needs a pointer '_this' to current instance.
+    secureDataCallback(result, _this) {
+        if(result.errorMessage == "") {
+            _this.secureData = result.secureData;
+            _this.reqInfo = result.reqInfo;
+        }
+        else {
+            console.log(JSON.stringify(result.errorMessage));
+            alert("You are not authorized to exeucute this acction")
+            window.location.href = '../login';
+        }   
+    }
+
 }
 export interface PeriodicElement {
 }

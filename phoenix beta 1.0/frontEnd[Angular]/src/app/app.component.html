@@ -37,6 +37,9 @@
             <!-- Manager -->
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && reqInfo.roles.includes('Manager')">
               <li class="nav-item">
+                <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
+              </li>  
+              <li class="nav-item">
                 <a class="nav-link" routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
               </li>
               <li class="nav-item">
@@ -99,13 +102,13 @@
   <!-- router container -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-1"></div>
+      <!-- <div class="col-md-1"></div> -->
 
       <!-- router body -->
-      <div class="col-10">
+      <div class="container">
         <router-outlet id="routerID"></router-outlet>
       </div>
-      <div class="col-1"></div>
+      <!-- <div class="col-md-1"></div> -->
 
     </div>
     

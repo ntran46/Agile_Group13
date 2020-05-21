@@ -1,7 +1,7 @@
-var UserController   = require('./Controllers/UserController');
-var RestaurantController = require('./Controllers/RestaurantController')
-const authMiddleware = require('./authHelper')
-const cors           = require('cors');
+var UserController          = require('./Controllers/UserController');
+var RestaurantController    = require('./Controllers/RestaurantController')
+const authMiddleware        = require('./authHelper')
+const cors                  = require('cors');
 
 
 // Routes
@@ -19,9 +19,13 @@ module.exports = function(app){
     app.post('/User/EditMyAccount', cors(), UserController.EditMyAccount);
     app.get('/User/MyAccount', cors(), UserController.MyAccount);
 
+    // Restaurant routes
     app.get('/Restaurant/Index', cors(), RestaurantController.Index);
     app.get('/Restaurant/Register', RestaurantController.Register);
     app.post('/Restaurant/RegisterRestaurant', RestaurantController.RegisterRestaurant);
+    app.post('/Restaurant/approveRestaurant', RestaurantController.approveRestaurant);
+    app.post('/Restaurant/WriteReviews', RestaurantController.WriteReviews);
+    app.get('/Restaurant/ReviewDetail', cors(), RestaurantController.ReviewDetail);
     app.delete('/Restaurant/Delete', cors(), RestaurantController.Delete);
 
 

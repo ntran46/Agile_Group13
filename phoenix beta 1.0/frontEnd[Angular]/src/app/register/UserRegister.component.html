@@ -31,8 +31,8 @@
                       </div>
                       <!-- email -->
                       <div class="form-group">
-                          <input class="form-control" type="email" placeholder="Email*" [(ngModel)]="_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" #email="ngModel" required />
-                            <mat-error *ngIf="email?.errors?.pattern" ><i>Email format incorrect</i></mat-error>
+                          <input class="form-control" type="email" placeholder="Email*" [(ngModel)]="_email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" name="email" #email="ngModel" required />
+                            <mat-error *ngIf="email?.errors?.pattern" ><i>Invalid format! Please enter a valid email [joe@aol.com, joe@wrox.co.uk, joe@domain.info].</i></mat-error>
                       </div>
                     
                       <!-- Username -->
@@ -89,9 +89,11 @@
     
                       <!-- phone number -->
                       <div class="form-group">
-                          <input type="text" class="form-control" [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" minlength="10" maxlength="10" name="txtEmpPhone" 
+                          <input type="text" class="form-control" pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s-]\d{3}[\s-]\d{4}$/" [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" minlength="12" maxlength="18" name="txtEmpPhone" 
                           placeholder="Your Phone Number *" />
-                      </div>
+                          <mat-error *ngIf="txtEmpPhone?.errors?.minlength"><i>Please enter a valid phone number [e.g. (123) 456-7890, 123-456-7890, 123 456 7890, +91 (123) 456-7890].</i></mat-error>
+                          <mat-error *ngIf="txtEmpPhone?.errors?.minlength"><i>Please enter a valid phone number [e.g. (123) 456-7890, 123-456-7890, 123 456 7890, +91 (123) 456-7890].</i></mat-error>
+                        </div>
     
                       <!-- security question -->
                       <div class="form-group">

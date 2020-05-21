@@ -52,14 +52,17 @@
 
                       <!-- Phone number -->
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="_phoneNo" name="phoneNo" #phoneNo="ngModel"  required />
+                        <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="_phoneNo" pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s-]\d{3}[\s-]\d{4}$/" name="phoneNo" #phoneNo="ngModel" minlength="12" maxlength="18" required />
                         <mat-error  *ngIf="phoneNo?.errors?.required"><p>You must enter a value</p></mat-error>
+                        <mat-error *ngIf="phoneNo?.errors?.minlength"><i>Please enter a valid phone number [e.g. (123) 456-7890, 123-456-7890, 123 456 7890, +91 (123) 456-7890].</i></mat-error>
+                        <mat-error *ngIf="phoneNo?.errors?.pattern"><i>Please enter a valid phone number [e.g. (123) 456-7890, 123-456-7890, 123 456 7890, +91 (123) 456-7890].</i></mat-error>
                       </div>
 
                       <!-- email -->
                       <div class="form-group">
-                          <input type="email" class="form-control" placeholder="Email" [(ngModel)]="_email" name="email" #email="ngModel"  required/>
+                          <input type="email" class="form-control" placeholder="Email" [(ngModel)]="_email" pattern="/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/" name="email" #email="ngModel"  required/>
                           <mat-error  *ngIf="email?.errors?.required"><p>You must enter a value</p></mat-error>
+                          <mat-error *ngIf="email?.errors?.pattern" ><i>Invalid format! Please enter a valid email [joe@aol.com, joe@wrox.co.uk, joe@domain.info].</i></mat-error>
                       </div>
 
                       <!-- license -->
