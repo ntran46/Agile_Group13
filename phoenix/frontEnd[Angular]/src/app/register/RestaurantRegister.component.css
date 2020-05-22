@@ -1,0 +1,102 @@
+
+.register-right{
+    background-color: #243447;
+    border-radius: 15px;
+    margin-top: 3%;
+    box-shadow:0px 0px 40px #121212;
+
+}
+
+.right-col{
+    padding: 3% 9%;
+    
+}
+
+.register .register-form{
+    margin-top: 10%;
+}
+.btnRegister{
+    float: right;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #900000;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+    margin-right: 25%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+
+.btnRegister:hover{
+    width: 60%;
+    background: crimson;
+    margin-right: 20%;
+    height: 3rem;
+    box-shadow:0px 0px 10px crimson;
+}
+
+
+
+.register-heading{
+    text-align: center;
+    margin-top: 8%;
+
+    color: #ffffff;
+}
+
+.checking:checked{
+    background-color: #900000;
+    background: #900000;
+    color: #900000;
+}
+
+.navbar-brand{
+    width: 80px;
+    height: 80px;
+}
+
+body{
+    overflow-x: hidden !important;
+}
+
+mat-error p{
+    font-size: 0.5rem !important;
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+.register{
+    height: 100vh;
+}
+
+.textArea{
+    width: 80%;
+    margin-left: 10%;
+    height: 5rem;
+    resize: none;
+}
+
+.pic-div{
+    background: url(../../assets/rest.jpg);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border:none;
+}
+
+.reg-row{
+    border: none;
+    border-radius: 15px;
+}
+
+input, textarea{
+    font-size: 0.8rem;
+}
+
+hr{
+    border-bottom: gainsboro 1px solid; 
+    width: 65%;
+}
