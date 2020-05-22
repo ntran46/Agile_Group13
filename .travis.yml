@@ -1,0 +1,6 @@
+language: node_js
+node_js: 
+        - "stable"
+script: cd phoenix/backEnd[Node]; npm install; cd test; npm install; npm test;
+services: 
+        - mongodb
