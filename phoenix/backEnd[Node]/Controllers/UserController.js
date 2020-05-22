@@ -54,7 +54,7 @@ exports.RegisterUser = async function (req, res) {
             address     : req.body.address,
             zipcode     : req.body.zipcode,
             txtEmpPhone : req.body.txtEmpPhone,
-            roles       : req.body.roles
+            roles       : roles
         });
 
         User.register(new User(newUser), req.body.password,

@@ -27,6 +27,7 @@ module.exports = function(app){
     app.post('/Restaurant/RegisterRestaurant', RestaurantController.RegisterRestaurant);
     app.post('/Restaurant/approveRestaurant', RestaurantController.approveRestaurant);
     app.post('/Restaurant/WriteReviews', RestaurantController.WriteReviews);
+    app.post('/Restaurant/AddMenuItem', RestaurantController.addMenuItem);
     app.get('/Restaurant/ReviewDetail', cors(), RestaurantController.ReviewDetail);
     app.delete('/Restaurant/Delete', cors(), RestaurantController.Delete);
 

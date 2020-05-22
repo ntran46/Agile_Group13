@@ -117,6 +117,35 @@ exports.RegisterRestaurant = async function (req, res) {
 };
 
 
+exports.addMenuItem = async function (req, res) {
+
+    let tempReviewObj = ({
+        email      : req.body.email,
+        category   : req.body.category,
+        description: req.body.description,
+        productName: req.body.productName,
+        price      : req.body.price
+    });
+
+    let restaurant = await _RestaurantRepo.updateMenu(tempReviewObj);
+    if (restaurant.errorMessage == "") {
+        res.json({
+            restaurant  : restaurant,
+            errorMessage: "",
+            Message     : "Item saved successfully.",
+        });
+    }
+
+    else {
+        res.json({
+            restaurant  : restaurant,
+            errorMessage: restaurant.errorMessage,
+            Message     : "An error occured! Item did not save.",
+        });
+    }
+}
+
+
 exports.approveRestaurant = async function (req, res) {
 
     let tempReviewObj = new Restaurant({
@@ -186,8 +215,8 @@ exports.ReviewDetail = async function (req, res) {
         for (var i = 0; i < RESObj.obj.comments.length; i++) {
             var userkey = RESObj.obj.comments[i].username;
             objArray.push([userkey, RESObj.obj.comments[i].userReview.rating,
-                RESObj.obj.comments[i].userReview.review,
-                RESObj.obj.comments[i].userReview.date]);
+                                    RESObj.obj.comments[i].userReview.review,
+                                    RESObj.obj.comments[i].userReview.date]);
         }
     }
     res.json({ restaurant: RESObj, comments: objArray, errorMessage: "", reqInfo: reqInfo });

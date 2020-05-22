@@ -132,6 +132,67 @@ class RestaurantRepo {
         }    
     }  
 
+    async updateMenu(tempObj){
+
+        let response = {
+            obj         : tempObj,
+            errorMessage: "" };
+
+            try {
+        
+                let ResObj = await this.getRestaurantByEmail(tempObj.email);
+                let RestaurantObj = ResObj.obj
+
+                if(RestaurantObj) {
+                    var items = {"productName"  : tempObj.productName,
+                                  "description" : tempObj.description,
+                                  "price"       : tempObj.price
+                                }
+                    var checkCategory = false    
+                            
+                    for (var i = 0; i < RestaurantObj.menu.length; i++){
+                        console.log(RestaurantObj.menu[i])
+                        if (RestaurantObj.menu[i].category == (undefined,null)){
+                            var categoryTemp = {"category": tempObj.category, "items": [items]}
+                            RestaurantObj.menu[i] = categoryTemp
+                            checkCategory = true
+                        }
+                        else if (RestaurantObj.menu[i].category == tempObj.category){
+                            RestaurantObj.menu[i].items.push(items)
+                            checkCategory = true
+                        }
+                    }
+
+                    if (!checkCategory) {
+                        RestaurantObj.menu.push({"category": tempObj.category, "items": [items]})
+                    }
+
+                    let updated = await Restaurant.updateOne(
+                        { email: tempObj.email},
+                        { $set: { menu: RestaurantObj.menu}
+                        }); 
+        
+                    if(updated.nModified!=0) {
+                        response.obj = tempObj;
+                        return response;
+                    }
+                    else {
+                        respons.errorMessage = 
+                            "An error occurred during the update. The item did not save." 
+                    };
+                    return response; 
+                }
+                else {
+                    response.errorMessage = "No item with this id cannot be found." };
+                    return response; 
+                }
+    
+            catch (err) {
+                response.errorMessage = err.message;
+                return  response;
+            } 
+    }
+
     async getMyReview(userName){
         
         var myReview  = [];
