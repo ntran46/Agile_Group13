@@ -1,0 +1,161 @@
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-faded navbar-dark" role="navigation">
+      
+        <!-- <div class="navbar-header"> -->
+          <!-- navbar logo -->
+          <a class="navbar-brand" href="#"><img class="img-fluid" alt="Responsive image" src="../assets/logo.png"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+        <!-- </div> -->
+        
+
+        <!-- navbar minus logo -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+          <!-- items if not authenticated/ public -->
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="!reqInfo.authenticated">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link"  routerLink="/UserRegister"  routerLinkActive="active">Sign Up</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link"  routerLink="/RestaurantRegister"  routerLinkActive="active">Partner Register</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link"   routerLink="/login">Login</a>
+            </li>
+          </ul>
+
+          <!-- navbar if authenticated / users or managers or restaurant owner -->
+
+            <!-- Manager -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && reqInfo.roles.includes('Manager')">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/UserManagement"  routerLinkActive="active">User Management</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/RestaurantManagement"  routerLinkActive="active">Restaurant Management</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
+              </li>
+            </ul>
+
+            <!-- Restaurant Owner -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && reqInfo.roles.includes('RestaurantOwner')">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/Main"  routerLinkActive="active">Home</a>
+              </li>  
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/MyMenu"  routerLinkActive="active">My Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   routerLink="/MyAccount"  routerLinkActive="active">My Restaurant</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   href="#" (click)='logout()'>Logout ({{reqInfo.username}})</a>
+              </li>
+            </ul>
+
+            <!-- User -->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="reqInfo.authenticated && !reqInfo.roles.includes('Manager') && !reqInfo.roles.includes('RestaurantOwner')">
+              
+              <li class="nav-item">
+                <a class="nav-link"  routerLink="/Main"  routerLinkActive="active">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   routerLink="/MyOrder"  routerLinkActive="active">My Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"   routerLink="/MyOrderHistory"  routerLinkActive="active">Order History</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account
+                </a>
+                <div class="dropdown-menu dropTable" aria-labelledby="navbarDropdownMenuLink">
+                  <div class="row">
+                      <div class="col-12 col-md-5 imgContainer">
+                        <img src="../assets/dance.gif" >
+                      </div>
+                      <div class="col-md-7">
+                        <div class="row">
+                          <div class="col-6">
+                            <p>Name:</p>
+                          </div>
+                          <div class="col-6">
+                            <p>{{_user.firstName }} {{_user.lastName}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <p>Username:</p>
+                          </div>
+                          <div class="col-6">
+                            <p>{{reqInfo.username}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6">
+                            <p>Email:</p>
+                          </div>
+                          <div class="col-6">
+                            <p>{{_user.email}}</p>
+                          </div>
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  <div class="row">
+                    <!-- <div class="col-0"></div> -->
+                    <div class="col-12 col-md-6">
+                        <a href="#" (click)='logout()' class="btn btn-primary btn-sm">
+                          Logout</a>
+                    </div>
+
+                    <div class="col-md-6 justify-content-center">
+                      <a routerLink="/MyAccount"  routerLinkActive="active" class="btn btn-primary btn-sm active">
+                        View or Change Profile</a>
+                    </div>
+                    <!-- <div class="col-0"></div> -->
+                  </div>
+                </div>
+              </li>
+              
+            </ul>
+
+      </div>
+        
+
+    </nav>
+
+  <!-- router container -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-1"></div>
+
+      <!-- router body -->
+      <div class="col-10">
+        <router-outlet id="routerID"></router-outlet>
+      </div>
+      <div class="col-1"></div>
+
+    </div>
+    
+    
+  </div>
+</body>
+    
+   

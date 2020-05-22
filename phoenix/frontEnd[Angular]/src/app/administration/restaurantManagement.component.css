@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Ubuntu', sans-serif;
+    src: url(https://fonts.googleapis.com/css2?family=Ubuntu&display=swap);
+}
+
+*{
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+.restImgContainer{
+    background: url(../../assets/restaurants/burgerking.png);
+    background-position: center;
+    background-size: cover;
+}
+.restContainer{
+    margin-top: 20px;
+    margin-bottom:20px;
+    padding: 0;
+}
+
+.restContainer:hover{
+    box-shadow:0px 0px 50px grey;
+    z-index: 2;
+}
+
+hr{
+    background-color: white;
+    width: 55%;
+    margin-top: 30px;
+}
+
+h3{
+    color: #fff;
+    text-align: center;
+}
+
+.btn{
+    width: 90%;
+    background: #900000;
+    border: none;
+    margin-left: 5%;
+}
+
+.btn:hover{
+    width: 100%;
+    background: crimson;
+    box-shadow:0px 0px 10px crimson;
+    margin-left:0;
+}
+
+@media (max-width:996px){
+    p,.btn{
+        font-size: 12px;
+    }
+    .btn{
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    h3{
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,49 @@
+<br/><br/>
+
+
+    <!-- Show all items -->
+    <h3 style="color: yellow;"><b>Menu</b></h3>
+    <div class="container4" *ngFor="let category of menu">
+
+        <mat-accordion >
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    {{category.category}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Category description
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-card-content>
+                    <table *ngFor="let item of category.items">
+                        <tr>
+                            <td>{{item.productName}}</td>
+                            <td style="width: 5cm;"></td>
+                            <td>{{item.description}}</td>
+                            <td style="width: 5cm;"></td>
+                            <td>{{item.price | currency:'USD':true }}</td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-expansion-panel>
+        </mat-accordion> 
+        <!--   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                    Self aware panel
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+            </mat-expansion-panel>-->
+        
+        <!-- <mat-card>Simple card</mat-card> -->
+        
+    </div>
+
+<br/>
+{{_errorMessage}}

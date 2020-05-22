@@ -1,0 +1,215 @@
+
+<!-- container -->
+<div class="container-fluid account-container">
+  <div class="row">
+    <!-- left side pic -->
+    <div class=".d-md-none col-xl-3 view-img-col">
+
+    </div>
+    <div class="col-xl-9">
+      <div class="container view-form-col" id=ViewTable style="display: block;">
+        <!-- form header -->
+        <h3>Account Info</h3>
+        <hr>
+        <div class="row">
+
+          <div class="col-12 left-col">
+            <!-- username -->
+            <div class="row">
+              <div class="col-6 col-md-6">
+                <p>Username:</p>
+              </div>
+              <div class="col-6 col-md-6">
+                <p>{{_UserArray.username}}</p>
+              </div>
+            </div>
+
+            <!-- firstname -->
+            <div class="row">
+              <div class="col-6 col-md-6">
+                <p>First Name:</p>
+              </div>
+              <div class="col-6 col-md-6">
+                <p>{{_UserArray.firstName}}</p>
+              </div>
+            </div>
+
+            <!-- lastname -->
+            <div class="row">
+              <div class="col-6 col-md-6">
+                <p>Last Name:</p>
+              </div>
+              <div class="col-6 col-md-6">
+                <p>{{_UserArray.lastName}}</p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="row">
+              <div class="col-md-6">
+                <p>Email:</p>
+              </div>
+              <div class="col-md-6">
+                <p>{{_UserArray.email}}</p>
+              </div>
+            </div>
+
+            <!-- Phone num -->
+            <div class="row">
+              <div class="col-6 col-md-6">
+                <p>Phone Number:</p>
+              </div>
+              <div class="col-6 col-md-6">
+                <p>{{_UserArray.txtEmpPhone}}</p>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="row">
+              <div class="col-md-6">
+                <p>Address:</p>
+              </div>
+              <div class="col-md-6">
+                <p>{{_UserArray.address}} {{_UserArray.zipcode}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <button class="btn btn-primary editbtn" id="View"  mat-raised-button (click)="View()" ng>Edit</button>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+
+
+
+
+          </div>
+
+
+        </div>
+        
+        
+      </div>
+      <div class="container edit-form-col" id=EditTable style="display: none;">
+        <!-- form header -->
+        <h3>Modify Your Info:</h3>
+        <hr>
+        <div class="row">
+
+          <!--  -->
+          <!--                  left column                 -->
+          <!--  -->
+          <div class="col-lg-6 left-col">
+
+            <!-- username -->
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="inputUser">Username:</label>
+                  <input class="form-control" id="inputUser" placeholder="Username" value="{{_UserArray.username}}" [disabled]="true" aria-describedby="userHelp">
+                  <small id="userHelp" class="form-text text-muted">Cannot Modify Username</small>  
+                </div>
+              </div>
+            </div>
+            
+            <!-- email -->
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="inputemail">Email:</label>
+                  <input class="form-control" id="inputemail" placeholder="Email*" [(ngModel)]="_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" #email="ngModel" value="_UserArray.email" required aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted" *ngIf="email?.errors?.pattern" >Wrong Email Pattern</small>  
+                </div>
+              </div>
+            </div>
+
+            <!-- password + confirm row -->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputpassword">Password:</label>
+                  <input class="form-control" id="inputpassword" type="password" placeholder="Password *" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" [(ngModel)]="_password" name="password" #password="ngModel" required aria-describedby="passwordHelp">
+                  <small id="passwordHelp" class="form-text text-muted" *ngIf="password?.errors?.pattern">Must contain at least one number, one uppercase, one lowercase letter, one special character, and at least 8 or more characters.</small>  
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputpassconfirm">Confirm Password:</label>
+                  <input class="form-control" id="inputpassconfirm" type="password" placeholder="Confirm*" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$" [(ngModel)]="_confirm" name="confirm" #confirm="ngModel" required aria-describedby="passconfirmHelp">
+                  <small id="passconfirmHelp" class="form-text text-muted" *ngIf="_password != _confirm">Passwords Don't Match</small>  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--  -->
+          <!--                  right column                -->
+          <!--  -->
+          <div class="col-lg-6 right-col">
+
+            <!-- first name + lastname row -->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputfname">First Name:</label>
+                  <input class="form-control" id="inputfname" placeholder="First Name*" [(ngModel)]="_firstname" name="firstname" #firstname="ngModel" value="_UserArray.firstName" required aria-describedby="fnameHelp">
+                  <small id="fnameHelp" class="form-text text-muted" *ngIf="firstname?.errors?.required" >Must Be Entered</small>  
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputlname">Last Name:</label>
+                  <input class="form-control" id="inputlname" placeholder="Last Name*" [(ngModel)]="_lastname" name="lastname" #lastname="ngModel" value="_UserArray.lastName" required aria-describedby="lnameHelp">
+                  <small id="lnameHelp" class="form-text text-muted" *ngIf="lastname?.errors?.required">Must Be Entered</small>  
+                </div>
+              </div>
+            </div>
+
+            <!-- address row -->
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="inputaddress">Address:</label>
+                  <input class="form-control" id="inputaddress" [(ngModel)]="_address" name="address" #address="ngModel" placeholder="Your Address" value="_UserArray.address">
+                </div>
+              </div>
+            </div>
+
+            <!-- zipcode + phonenumber row -->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputzipcode">Zipcode:</label>
+                  <input class="form-control" id="inutzipcode" type="text" [(ngModel)]="_zipcode" name="zipcode" #zipcode="ngModel" placeholder="Zipcode" value="_UserArray.zipcode">
+                  <small style="visibility: hidden;">s</small>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="inputphone">Phone Number:</label>
+                  <input class="form-control" id="inputphone" type="text" [(ngModel)]="_txtEmpPhone" name="txtEmpPhone" #txtEmpPhone="ngModel" minlength="10" maxlength="10" name="txtEmpPhone" placeholder="Phone Number" value="_UserArray.txtEmpPhone">
+                  <small style="visibility: hidden;">s</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class=".d-sm-none col-md-3"></div>
+          <div class="col-md-3">
+            <button class="btn btn-primary savebtn" id="Save" mat-raised-button (click)="Submit()" ng>Save</button>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-primary cancelbtn" id="Cancel"  mat-raised-button (click)="Cancel()" ng>Cancel</button>
+          </div>
+          <div class=".d-sm-none col-md-3"></div>
+        </div>
+
+      </div>
+  </div>
+</div>
