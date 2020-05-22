@@ -1,0 +1,232 @@
+/* @font-face {
+    font-family: 'Ubuntu', sans-serif;
+    src: url(https://fonts.googleapis.com/css2?family=Ubuntu&display=swap);
+}
+
+*{
+    font-family: 'Ubuntu', sans-serif !important;
+} */
+
+.main{
+    background-color: inherit;
+    padding: 10px;
+    border-radius: 15px;
+}
+.main hr{
+    background-color: white;
+    width: 55%;
+    margin-top: 30px;
+}
+
+#slideOne{
+    background-image: url(../../assets/carousel/carousel1-normal.jpg);
+    border-radius: 12px;
+
+}
+
+#slideTwo{
+    background-image: url(../../assets/carousel/carousel2-normal.png);
+    border-radius: 12px;
+    background-position: center;
+    background-size: cover;
+}
+
+#slideThree{
+    background-image: url(../../assets/carousel/carousel3-normal.jpg);
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.firstSlideCap{
+    right: 50% !important;
+    left: 10% !important;
+    bottom: 50% !important;
+    
+}
+.secondSlideCap{
+    bottom: 50%
+}
+
+.carouselIndicators{
+    margin-bottom: 40px;
+}
+
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.carouselIndicators,.carousel-inne{
+    border-radius: 12px;
+}
+
+.fb-card, .pt-card{
+    background-color: inherit;
+    margin: 40px 0;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    height: 100%;
+    border-radius: 0;
+    color: white;
+}
+
+.feedback-container,.partner-container{
+    padding: 0;
+    margin: 0;
+    align-content: stretch;
+    justify-content: center;
+    text-align: center;
+}
+.feedback-container a, .partner-container a{
+    bottom: 0;
+    background-color: #900000;;
+    border: none;
+}
+
+.feedback-container text-card ,.partner-container text-card{
+    margin: 10%;
+    padding: 10%;
+}
+
+.restContainer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.restContainer:hover{
+    cursor: pointer;
+    box-shadow:0px 0px 50px grey;
+    z-index: 2;
+}
+
+.restImgContainer{
+    background: url(../../assets/restaurants/mcdonalds.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.card-img{
+    width: 100%;
+    height: 100%;
+    color: red;
+    /* box-shadow:0px 0px 50px white; */
+    -webkit-filter: drop-shadow(0px 0px 30px #fff);
+    filter: drop-shadow(0px 0px 30px #fff);
+}
+
+.feedback-container hr, .partner-container hr{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.card .restImg{
+    height: inherit;
+    width: inherit;
+    top: 50%;
+    left: 50%;
+    margin-left: 0;
+}
+
+.listText{
+    background-color: inherit;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.listText h1{
+    color: #fff;
+}
+.card-body{
+    padding-left: 0;
+} 
+
+.fb-card p{
+    margin-bottom: 2rem;
+}
+.readyToOrder .jumbotron{
+    background-color: inherit;
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.readyToOrder a{
+    width: 90%;
+    background-color: #900000;
+    text-align: center;
+    border: none;
+}
+
+.btn, .readyToOrder a, .cardContainer a{
+    width: 90%;
+    background: #900000;
+    border: none;
+    margin-left: 5%;
+}
+
+.btn:hover, .readyToOrder a:hover, .cardContainer a:hover{
+    width: 100%;
+    background: crimson;
+    box-shadow:0px 0px 10px crimson;
+    margin-left:0;
+}
+
+.btnContainer{
+    margin-top: 10px;
+    padding: 20px
+}
+
+@media (max-width: 869px){
+    b,p,a,.btn{
+        font-size: 12px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    h5{
+        font-size: 14px;
+    }
+    .btn{
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin: 5px 0;
+    }
+    .card-img{
+        width: 50%;
+        /* height: 50%; */
+    }
+    .carousel, .carousel-item{
+        max-height: 500px;
+    }
+}
+/* 
+@media(min-width:769px){
+
+    .btnCol1{
+        position: absolute;
+        bottom: 0px;
+        margin-bottom: 10px;
+    }
+    .btnCol2{
+        position: absolute;
+        bottom: 0px;
+        margin-bottom: 10px;
+    }
+} */
